@@ -11,4 +11,12 @@
 		</a>
 	</li>
 </ul>
-
+<?php
+if (isset($_SESSION['success'])) {
+	echo '<div class="p-4 bg-green text-2xl text-white text-center font-sans font-semibold">'.$_SESSION['success'].'</div>';
+	unset($_SESSION['success']);
+} elseif (isset($_SESSION['error'])) {
+	echo '<div class="p-4 bg-red text-2xl text-white text-center font-sans font-semibold">'.$_SESSION['error'].'</div>';
+	unset($_SESSION['error']);
+}
+?>

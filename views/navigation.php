@@ -7,7 +7,9 @@
 	</li>
 	<li class="flex">
 		<a class="text-center block font-semibold text-white bg-teal-dark hover:bg-teal-darker py-4 px-4 no-underline" href="/views/login-view.php">
-			Login
+			<?php if(isset($_SESSION['username'])) : ?>Logout
+				<?php else : ?> Login
+				<?php endif; ?>
 		</a>
 	</li>
 </ul>

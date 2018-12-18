@@ -2,7 +2,7 @@
 require __DIR__.'/../views/header.php';
 ?>
 <div class="bg-grey-light p-6">
-	<form method="post" class="text-center" action="/app/posts/new-post.php">
+	<form method="post" class="text-center" action="/app/posts/store.php">
 		<label for=title class="block font-bold uppercase tracking-wide pt-3">Subject:</label>
 		<input type="title" name="title" class="bg-grey rounded py-2 border-solid border-black my-2">
 		<label for=content class="block font-bold uppercase tracking-wide pt-3">Post:</label>

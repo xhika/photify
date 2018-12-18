@@ -3,7 +3,7 @@
 		<a class="text-center block font-semibold text-white bg-teal-dark hover:bg-teal-darker py-4 px-4 no-underline" href="/index.php">Home</a>
 	</li>
 	<li class="flex-1">
-		<a class="text-center block font-semibold text-white bg-teal-dark hover:bg-teal-darker py-4 px-4 no-underline" href="/app/users/profile.php">Profile</a>
+		<?= noProfile(); ?>
 	</li>
 	<li class="flex">
 		<?= isLoggedIn(); ?>

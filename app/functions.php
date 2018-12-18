@@ -36,3 +36,12 @@ function isLoggedIn()
 		echo '<a class="text-center block font-semibold text-white bg-teal-dark hover:bg-teal-darker py-4 px-4 no-underline" href="/app/users/logout.php">Logout</a>';
 	}
 }
+function noProfile()
+{
+	if (isset($_SESSION['username'])) {
+		echo '<a class="text-center block font-semibold text-white bg-teal-dark hover:bg-teal-darker py-4 px-4 no-underline" href="/app/users/profile.php">Profile</a>';
+	}
+	if (!isset($_SESSION['username'])) {
+		echo '<a class="text-center block font-semibold text-white bg-teal-dark hover:bg-teal-darker py-4 px-4 no-underline" href="#">Profile</a>';
+	}
+}

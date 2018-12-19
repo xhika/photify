@@ -17,6 +17,9 @@ try {
 			$_SESSION['error'] = 'Please fill in the required fields.';
 			header('Location:login.php');
 		} else {
+
+			$username = strtolower($username);
+
 	        $stmt = $pdo->prepare('SELECT * FROM users WHERE username = :username AND password = :password');
 
 	        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -24,6 +27,8 @@ try {
 	        $stmt->execute();
 
 	        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 	        if (!$user) {
 	        	$_SESSION['error'] = 'Wrong username or password.';

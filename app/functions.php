@@ -16,6 +16,9 @@ if (!function_exists('redirect')) {
 		exit;
 	}
 }
+/**
+ * Using $_SESSION to style upon success/error
+ */
 function notification()
 {
 	if (isset($_SESSION['success'])) {
@@ -26,6 +29,9 @@ function notification()
 		unset($_SESSION['error']);
 	}
 }
+/**
+ * Determines if logged in.
+ */
 function isLoggedIn()
 {
 	if (!isset($_SESSION['username'])) {
@@ -36,6 +42,9 @@ function isLoggedIn()
 		echo '<a class="text-center block font-semibold text-white bg-teal-dark hover:bg-teal-darker py-4 px-4 no-underline" href="/app/users/logout.php">Logout</a>';
 	}
 }
+/**
+ * Makes profile link unavailbe if not logged in.
+ */
 function noProfile()
 {
 	if (isset($_SESSION['username'])) {
@@ -45,3 +54,28 @@ function noProfile()
 		echo '<a class="text-center block font-semibold text-white bg-teal-dark hover:bg-teal-darker py-4 px-4 no-underline" href="#">Profile</a>';
 	}
 }
+/**
+ * * Get information about user from database.
+ *
+ * @param  PDO
+ *
+ * @return array
+ */
+function getUserInfo(PDO $pdo)
+{
+	try {
+			$username = $_SESSION['username'];
+			$sql = 'SELECT * FROM users WHERE username = :username';
+			$stmt = $pdo->prepare($sql);
+			$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+			$stmt->execute();
+
+			$results = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			return $results;
+
+		} catch (Exception $e) {
+		echo 'Something went wrong with the connection: ' . $e->getMessage();
+	}
+}
+

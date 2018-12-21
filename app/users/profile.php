@@ -2,16 +2,11 @@
 
 $imageResult = getImage($pdo);
 $filepath = $imageResult['filepath'];
-$date = $imageResult['date'];
+// $date = $imageResult['date'];
 
 $userResult =  getUserInfo($pdo);
 $bio = $userResult['bio'];
-if (empty($bio)) {
-	$bio = "<i>Change me in settings.</i>";
-}
-if (empty($filepath)) {
-	$filepath = '/no-avatar.png';
-}
+
 ?>
 
 

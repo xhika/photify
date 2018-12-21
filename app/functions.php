@@ -72,6 +72,9 @@ function getUserInfo(PDO $pdo)
 
 			$results = $stmt->fetch(PDO::FETCH_ASSOC);
 
+			if (empty($results['bio'])) {
+				$results['bio'] = "<i>Change me in settings.</i>";
+			}
 			return $results;
 
 		} catch (Exception $e) {
@@ -140,9 +143,27 @@ function getImage(PDO $pdo)
 		$stmt = $pdo->prepare($sql);
 		$stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
 		$stmt->execute();
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+
+		$results = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if (empty($results['filepath'])) {
+			$results['filepath'] = '/no-avatar.png';
+		}
+
+		return $results;
+
+
 
 	} catch (Exception $e) {
 		echo 'Something went wrong with the connection: ' . $e->getMessage();
+	}
+}
+function defaultUser()
+{
+	if (empty($bio)) {
+		return $bio = "<i>Change me in settings.</i>";
+	}
+	if (empty($filepath)) {
+		return $filepath = '/no-avatar.png';
 	}
 }

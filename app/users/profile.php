@@ -1,9 +1,17 @@
 <?php require __DIR__.'/../../views/header.php';
 
-$result = getImage($pdo);
+$imageResult = getImage($pdo);
+$filepath = $imageResult['filepath'];
+$date = $imageResult['date'];
 
-$filepath = $result['filepath'];
-$date = $result['date'];
+$userResult =  getUserInfo($pdo);
+$bio = $userResult['bio'];
+if (empty($bio)) {
+	$bio = "<i>Change me in settings.</i>";
+}
+if (empty($filepath)) {
+	$filepath = '/no-avatar.png';
+}
 ?>
 
 
@@ -15,10 +23,7 @@ $date = $result['date'];
 			<?php require __DIR__.'/../../views/upload-view.php'; ?>
 			<h2 class="tracking-wide normal-case font-normal text-teal-dark text-xl mt-4 mb-4">Biography</h2>
 			<div class="bg-grey-light h-auto w-2/3 lg:w-1/3 rounded mx-auto p-4 normal-case font-light">
-			<?php
-				$bio =  getUserInfo($pdo);
-				echo $bio['bio'];
-			 ?>
+			<?= $bio; ?>
 			</div>
 			<div class="mt-4">
 				<button class="bg-teal py-3 px-4 rounded font-semibold text-white mt-2">Profile</button>

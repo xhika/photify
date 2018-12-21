@@ -22,10 +22,10 @@ if (!function_exists('redirect')) {
 function notification()
 {
 	if (isset($_SESSION['success'])) {
-		echo '<div class="p-4 bg-green text-1xl text-white text-center font-sans font-semibold">'.$_SESSION['success'].'</div>';
+		echo '<div class="p-4 bg-green text-1xl text-white text-center font-semibold tracking-wide">'.$_SESSION['success'].'</div>';
 		unset($_SESSION['success']);
 	} elseif (isset($_SESSION['error'])) {
-		echo '<div class="p-4 bg-red text-1xl text-white text-center font-sans font-semibold">'.$_SESSION['error'].'</div>';
+		echo '<div class="p-4 bg-red text-1xl text-white text-center font-semibold tracking-wide">'.$_SESSION['error'].'</div>';
 		unset($_SESSION['error']);
 	}
 }
@@ -78,4 +78,69 @@ function getUserInfo(PDO $pdo)
 		echo 'Something went wrong with the connection: ' . $e->getMessage();
 	}
 }
+/**
+ * Here we upload filepath to db.
+ */
+function uploadImage($pdo)
+{
+	try {
+		if (isset($_POST['upload'])) {
 
+			$image = $_FILES['image'];
+
+			if ($image['type'] !== 'image/png') {
+				$_SESSION['error'] = 'The image file type is not allowed.';
+				redirect('/app/users/profile.php');
+			} else {
+				$path = __DIR__.'/../img/';
+				if (!file_exists($path)) {
+					mkdir($path);
+				}
+				$extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+
+				$filename = uniqid().'.'.$extension;
+				$path .= $filename;
+
+				if (move_uploaded_file($image['tmp_name'], $path)) {
+
+					$userId = $_SESSION['username'];
+					$date = date('Y-m-d H:i:s');
+
+					$sql = 'INSERT INTO images (filepath, user_id, date) VALUES (:image, :userId, :date)';
+
+					$stmt = $pdo->prepare($sql);
+
+					$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
+					$stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+					$stmt->bindParam(':date', $date, PDO::PARAM_STR);
+
+					$stmt->execute();
+
+					if (!$stmt) {
+						die(var_dump($pdo->errorInfo()));
+					} else {
+						$_SESSION['success'] = 'Image was successfully uploaded. 👍';
+						redirect('/app/users/profile.php');
+					}
+				}
+			}
+		}
+	} catch (Exception $e) {
+		echo 'Something went wrong with the connection: ' . $e->getMessage();
+	}
+}
+/**
+ * Here we're getting image data from db.
+ */
+function getImage(PDO $pdo)
+{
+	try {
+		$sql = 'SELECT * FROM images';
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	} catch (Exception $e) {
+		echo 'Something went wrong with the connection: ' . $e->getMessage();
+	}
+}

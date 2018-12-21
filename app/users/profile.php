@@ -1,13 +1,19 @@
-<?php require __DIR__.'/../../views/header.php'; ?>
+<?php require __DIR__.'/../../views/header.php';
+// uploadImage($pdo);
+$result = getImage($pdo);
+$filepath = $result[0]['filepath'];
+$date = $result[0]['date'];
+?>
 
 
-	<article>
+	<article class="h-screen">
 		<div class="max-w-md mx-auto text-center uppercase">
  	   		<h1 class="m-0 mb-2 p-4 text-teal">Welcome</h1>
 			<span class="bg-teal mb-2 py-2 px-3 font-semibold rounded text-white"><?= $_SESSION['username']; ?></span>
-			<img class="mt-6 border block mx-auto h-32 rounded-full shadow-lg" src="/img/avatar1.png">
+			<img class="mt-6 border block mx-auto h-32 rounded-full shadow-lg" src="/img/<?= $filepath; ?>">
+			<?php require __DIR__.'/../../views/upload-view.php'; ?>
 			<h2 class="tracking-wide normal-case font-normal text-teal-dark text-xl mt-4 mb-4">Biography</h2>
-			<div class="bg-grey-light h-auto w-1/4 rounded mx-auto p-4 normal-case font-light">
+			<div class="bg-grey-light h-auto w-2/3 lg:w-1/3 rounded mx-auto p-4 normal-case font-light">
 			<?php
 				$bio =  getUserInfo($pdo);
 				echo $bio['bio'];
@@ -15,8 +21,9 @@
 			</div>
 			<div class="mt-4">
 				<button class="bg-teal py-3 px-4 rounded font-semibold text-white mt-2">Profile</button>
-				<button class="bg-green py-3 px-4 rounded font-semibold text-white mt-2"><a href="/../views/new-post.php" class="no-underline inher text-white">Create Post</a></button>
-				<button class="bg-red py-3 px-4 rounded font-semibold text-white mt-2">Settings</button>
+				<button class="bg-green py-3 px-4 rounded font-semibold text-white mt-2"><a href="/../views/new-post.php" class="no-underline text-white">Create Post</a></button>
+				<button class="bg-red py-3 px-4 rounded font-semibold text-white mt-2">
+					<a href="/../views/settings-view.php" class="no-underline text-white">Settings</a></button>
 			</div>
 		</div>
 	</article>

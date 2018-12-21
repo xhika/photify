@@ -1,8 +1,9 @@
 <?php require __DIR__.'/../../views/header.php';
-// uploadImage($pdo);
+
 $result = getImage($pdo);
-$filepath = $result[0]['filepath'];
-$date = $result[0]['date'];
+
+$filepath = $result['filepath'];
+$date = $result['date'];
 ?>
 
 

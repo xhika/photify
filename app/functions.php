@@ -135,10 +135,12 @@ function uploadImage($pdo)
 function getImage(PDO $pdo)
 {
 	try {
-		$sql = 'SELECT * FROM images';
+		$user_id = $_SESSION['username'];
+		$sql = 'SELECT * FROM images WHERE user_id = :user_id ORDER BY date DESC LIMIT 1';
 		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
 		$stmt->execute();
-		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 
 	} catch (Exception $e) {
 		echo 'Something went wrong with the connection: ' . $e->getMessage();

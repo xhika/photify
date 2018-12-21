@@ -15,7 +15,7 @@ try {
         $password = trim(filter_var($_POST['password'], FILTER_SANITIZE_STRING));
 		if (empty($username && $password)) {
 			$_SESSION['error'] = 'Please fill in the required fields.';
-			header('Location:login.php');
+			redirect('login.php');
 		} else {
 
 			$username = strtolower($username);
@@ -32,13 +32,13 @@ try {
 
 	        if (!$user) {
 	        	$_SESSION['error'] = 'Wrong username or password.';
-	        	header('Location:../users/login.php');
+	        	redirect('../users/login.php');
 	        	exit;
 	        } else {
     			password_verify($_POST['password'], $user[0]['password']);
 	 			$_SESSION['username'] = strtolower($username);
 	 			$_SESSION['success'] = "You have been logged in successfully!";
-	        	header('Location:../users/profile.php');
+	 				redirect('../users/profile.php');
 	        }
 	    }
 	}

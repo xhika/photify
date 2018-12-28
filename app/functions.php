@@ -212,13 +212,13 @@ function timeAgo($date)
 		}
 	} elseif ($months <= 12) {
 		if ($months == 1) {
-			return 'a month ago';
+			return "a month ago";
 		} else {
 			return "$months months ago";
 		}
 	} else {
 		if ($years == 1) {
-			return 'one year ago';
+			return "one year ago";
 		} else {
 			return "$years years ago";
 		}

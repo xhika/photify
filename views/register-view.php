@@ -1,6 +1,6 @@
 <?php require __DIR__.'/../views/header.php'; ?>
 
-<div class="bg-grey-lighter p-6">
+<div class="bg-grey-lighter p-6 h-screen">
 	<form method="post" class="text-center" action="/app/users/register.php">
 		<label for=firstname class="block font-bold uppercase tracking-wide pt-3">firstname:</label>
 		<input type="text" name="firstname" class="bg-grey-light rounded py-2 border-solid border-black my-2">

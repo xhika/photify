@@ -13,6 +13,9 @@ try {
 		$username = filter_var(htmlspecialchars($_POST['username'], FILTER_SANITIZE_STRING));
 		$password = filter_var(htmlspecialchars($_POST['password'], FILTER_SANITIZE_STRING));
 
+	 		$username = strtolower($username);
+			$email = strtolower($email);
+
 		if (empty($firstname && $lastname && $email && $username && $password)) {
 				$_SESSION['error'] = 'Please fill in all the required fields.';
 				header('Location:register.php');
@@ -32,13 +35,13 @@ try {
 
 			if ($checkUser === $username) {
 				$_SESSION['error'] = 'The username has already been taken, try another one!';
-				header('Location:register.php');
+				redirect('register.php');
 				exit;
 			}
 
 			if ($checkEmail === $email) {
 				$_SESSION['error'] = 'The email has already been used.';
-				header('Location:register.php');
+				redirect('register.php');
 				exit;
 			}
 
@@ -65,7 +68,7 @@ try {
 			}
 
 			$_SESSION['success'] = 'Registration successfully completed!';
-			header('Location:../views/login-view.php');
+			redirect('../views/login-view.php');
 			exit;
 		}
 	}

@@ -107,15 +107,14 @@ function uploadImage($pdo)
 				if (move_uploaded_file($image['tmp_name'], $path)) {
 
 					$userId = $_SESSION['username'];
-					$date = date('Y-m-d H:i:s');
 
-					$sql = 'INSERT INTO images (filepath, user_id, date) VALUES (:image, :userId, :date)';
+					$sql = 'INSERT INTO images (filepath, user_id) VALUES (:image, :userId)';
 
 					$stmt = $pdo->prepare($sql);
 
 					$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
 					$stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
-					$stmt->bindParam(':date', $date, PDO::PARAM_STR);
+
 
 					$stmt->execute();
 
@@ -139,7 +138,7 @@ function getImage(PDO $pdo)
 {
 	try {
 		$user_id = $_SESSION['username'];
-		$sql = 'SELECT * FROM images WHERE user_id = :user_id ORDER BY date DESC LIMIT 1';
+		$sql = 'SELECT * FROM images WHERE user_id = :user_id';
 		$stmt = $pdo->prepare($sql);
 		$stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
 		$stmt->execute();
@@ -165,5 +164,63 @@ function defaultUser()
 	}
 	if (empty($filepath)) {
 		return $filepath = '/no-avatar.png';
+	}
+}
+/**
+ * Here we get how long time ago a post was created.
+ */
+function timeAgo($date)
+{
+	date_default_timezone_set("Europe/Stockholm");
+	$timeAgo = strtotime($date);
+	$currentTime = time();
+	$timeDifference = $currentTime - $timeAgo;
+	$seconds = $timeDifference;
+
+	$minutes = round($seconds / 60); // value 60 is seconds
+	$hours   = round($seconds / 3600); //value 3600 is 60 minutes * 60 sec
+	$days    = round($seconds / 86400); //86400 = 24 * 60 * 60;
+	$weeks   = round($seconds / 604800); // 7*24*60*60;
+	$months  = round($seconds / 2629440); //((365+365+365+365+366)/5/12)*24*60*60
+	$years   = round($seconds / 31553280); //(365+365+365+365+366)/5 * 24 * 60 * 60
+
+	if ($seconds <= 60) {
+		return 'Just now';
+	} elseif ($minutes <= 60) {
+		if ($minutes == 1) {
+			return "one minute ago";
+		} else {
+			return "$minutes minutes ago";
+		}
+	} elseif ($hours <= 24) {
+		if ($hours == 1) {
+			return "an hour ago";
+		} else {
+			return "$hours hours ago";
+		}
+	} elseif ($days <= 7) {
+		if ($days == 1) {
+			return "yesterday";
+		} else {
+			return "$days days ago";
+		}
+	} elseif ($weeks <= 4.3) {
+		if($weeks == 1) {
+			return "a week ago";
+		} else {
+			return "$weeks weeks ago";
+		}
+	} elseif ($months <= 12) {
+		if ($months == 1) {
+			return 'a month ago';
+		} else {
+			return "$months months ago";
+		}
+	} else {
+		if ($years == 1) {
+			return 'one year ago';
+		} else {
+			return "$years years ago";
+		}
 	}
 }

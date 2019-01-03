@@ -16,4 +16,4 @@ require __DIR__.'/../app/autoload.php';
 <body>
     <?php require __DIR__.'/navigation.php'; ?>
 
-    <div class="w-full bg-grey-lighter h-auto pb-8">
+    <div class="w-full bg-grey-lighter h-auto pb-8 h-screen">

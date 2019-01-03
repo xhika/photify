@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/../views/header.php';
 ?>
-<div class="bg-grey-lighter p-6">
+<div class="bg-grey-lighter p-6 h-screen">
 	<form method="post" class="text-center" enctype="multipart/form-data" action="/app/posts/store.php">
 		<label for=title class="block font-bold uppercase tracking-wide pt-3">Subject:</label>
 		<input type="title" name="title" class="bg-grey-light rounded py-2 border-solid border-black my-2">
@@ -15,7 +15,6 @@ require __DIR__.'/../views/header.php';
 				</label>
 				<button type="submit" name="submit" class="mt-4 py-2 px-5 bg-teal m-2 rounded text-white font-thin">Post</button>
 			</div>
-
-
 	</form>
 </div>
+<?php require __DIR__.'/../views/footer.php'; ?>

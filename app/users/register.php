@@ -18,7 +18,7 @@ try {
 
 		if (empty($firstname && $lastname && $email && $username && $password)) {
 				$_SESSION['error'] = 'Please fill in all the required fields.';
-				header('Location:register.php');
+				redirect('register.php');
 		} else {
 
 			$sql = 'SELECT * FROM users WHERE username = :username OR email = :email';

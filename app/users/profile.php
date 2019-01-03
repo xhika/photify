@@ -39,7 +39,7 @@ $bio = $userResult['bio'];
 					<img class="border block mx-auto w-full h-64 bg-auto" src="/img/<?= $post['filepath']; ?>">
 				<div class="flex flex-col justify-around">
 					<span class="bg-teal text-white p-4"><?= $post['content']; ?></span>
-					<p class="pl-4 pt-2 float-right text-grey-light bg-white"><?= timeAgo($post['date']); ?></p>
+					<p class="pl-4 pt-2 font-thin leading-tight text-grey bg-white"><?= timeAgo($post['date']); ?></p>
 				</div>
 			</div>
 		<?php endforeach; ?>

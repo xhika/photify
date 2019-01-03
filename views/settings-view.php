@@ -31,6 +31,6 @@ $filepath = $imageResult['filepath'];
 			</div>
 		</div>
 	</div>
-	<a href="/app/users/settings-update.php"><button class="bg-teal-dark mt-4 py-2 px-4 rounded text-white hover:bg-teal-light font-sans font-bold">Edit</button></a>
+	<a href="/../views/update-view.php"><button class="bg-teal-dark mt-4 py-2 px-4 rounded text-white hover:bg-teal-light font-sans font-bold">Edit</button></a>
 </div>
 <?php require __DIR__.'/../views/footer.php'; ?>

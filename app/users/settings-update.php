@@ -5,11 +5,16 @@ declare(strict_types=1);
 
 try {
 	if (isset($_POST['save'])) {
-		$post = $_POST;
-		$email = $post['email'];
-		$bio = $post['bio'];
-		$password = $post['password'];
+
 		$username = $_SESSION['username'];
+
+		$email = filter_var(htmlspecialchars($_POST['email'], FILTER_SANITIZE_EMAIL));
+		$bio = filter_var(htmlspecialchars($_POST['bio'], FILTER_SANITIZE_STRING));
+		$password = filter_var(htmlspecialchars($_POST['password'], FILTER_SANITIZE_STRING));
+		$username = filter_var(htmlspecialchars($username, FILTER_SANITIZE_STRING));
+
+		$email = strtolower($email);
+		$bio = ucfirst($bio);
 
 		$sql = 'UPDATE users SET email = :email, bio = :bio, password = :password WHERE username = :username';
 		$stmt = $pdo->prepare($sql);
@@ -21,12 +26,12 @@ try {
 
 		if (!$stmt) {
 			$_SESSION['error'] = 'Update unsuccessfull, please try again.';
-				redirect('profile.php');
+				redirect('/app/users/profile.php');
 				exit;
 
 			} else {
 				$_SESSION['success'] = 'Update successfully completed!';
-				redirect('profile.php');
+				redirect('/app/users/profile.php');
 				exit;
 			}
 	}

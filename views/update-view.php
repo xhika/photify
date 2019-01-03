@@ -2,11 +2,11 @@
 require __DIR__.'/../views/header.php';
 require __DIR__.'../../app/users/settings-update.php';
 ?>
-<div class="bg-grey-lighter p-6 mx-auto text-center text-teal h-screen">
+<div class="bg-grey-lighter p-6 mx-auto text-center text-teal">
 	<h1 class="uppercase"><?= $_SESSION['username']; ?></h1>
 
-<div class="bg-grey-lighter p-6 h-screen w-full md:w-3/5 mx-auto p-4 rounded">
-	<form method="post" class="text-center" action="settings-update.php">
+<div class="bg-grey-lighter p-6 w-full md:w-3/5 mx-auto p-4 rounded h-screen">
+	<form method="post" class="text-center" action="/views/update-view.php">
 		<label for=email class="block font-bold uppercase tracking-wide pt-3">email:</label>
 		<input type="email" name="email" class="bg-grey-light rounded py-2 border-solid border-black my-2">
 		<label for="bio" class="block font-bold uppercase tracking-wide">bio:</label>

@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 try {
 
-	$stmt = $pdo->prepare('SELECT * FROM posts');
+	$stmt = $pdo->prepare('SELECT * FROM posts ORDER BY date DESC');
 
 	if (!$stmt) {
 		die(var_dump($pdo->errorInfo()));

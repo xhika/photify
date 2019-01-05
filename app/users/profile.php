@@ -27,18 +27,22 @@ $bio = $userResult['bio'];
 		</div>
 	</article>
 </div>
-	<h2 class="max-w-lg mx-auto text-center text-teal pt-6 pb-6">Feed</h2>
-	<?php  require __DIR__.'/../posts/view.php'; ?>
-		<?php foreach ($posts as $post) : ?>
+<h2 class="max-w-lg mx-auto text-center text-teal pt-6 pb-6">Feed</h2>
+<?php  require __DIR__.'/../posts/view.php'; ?>
+	<?php foreach ($posts as $post) : ?>
 			<div class="mb-8 md:max-w-sm mx-auto">
 				<p class="bg-teal p-4 text-white text-lg font-semibold"><?= $post['user_id']; ?></p>
 					<img class="border block mx-auto w-full h-64 bg-auto" src="/img/<?= $post['filepath']; ?>">
 				<div class="flex flex-col justify-around">
 					<span class="bg-teal text-white p-4 leading-normal"><?= $post['content']; ?></span>
 					<p class="pl-4 pt-2 font-thin leading-tight text-grey bg-white"><?= timeAgo($post['date']); ?></p>
+			<?php if($_SESSION['username'] == $post['user_id']) :?>
+					<button class="bg-green mx-auto font-white w-1/6 rounded m-1 py-3"><a href="/../../views/edit-view.php?id=<?=$post['id']; ?>" class="no-underline text-white">Edit</a></button>
+					<button class="bg-red mx-auto font-white w-1/6 rounded m-1 py-3"><a href="/app/posts/delete.php?id=<?=$post['id']; ?>" class="no-underline text-white">Delete</a></button>
+			<?php endif;?>
 				</div>
 			</div>
-		<?php endforeach; ?>
+	<?php endforeach; ?>
 
 
 <?php require __DIR__.'/../../views/footer.php'; ?>

@@ -32,7 +32,10 @@ try {
 		$columns = implode(', ', $columns);
 
 		$sql = "UPDATE users SET $columns WHERE username = :username";
+
 		$stmt = $pdo->prepare($sql);
+
+
 		if (!empty($email)) {
 			$stmt->bindParam(':email', $email, PDO::PARAM_STR);
 		}
@@ -40,6 +43,7 @@ try {
 			$stmt->bindParam(':bio', $bio, PDO::PARAM_STR);
 		}
 		if (!empty($password)) {
+			$password = password_hash($password, PASSWORD_DEFAULT);
 			$stmt->bindParam(':password', $password, PDO::PARAM_STR);
 		}
 		$stmt->bindParam(':username', $username, PDO::PARAM_STR);

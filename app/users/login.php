@@ -20,25 +20,21 @@ try {
 
 			$username = strtolower($username);
 
-	        $stmt = $pdo->prepare('SELECT * FROM users WHERE username = :username AND password = :password');
+	        $stmt = $pdo->prepare('SELECT * FROM users WHERE username = :username');
 
 	        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-	        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
 	        $stmt->execute();
 
-	        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-
-	        if (!$user) {
-	        	$_SESSION['error'] = 'Wrong username or password.';
+	        if (!password_verify($password, $user['password'])) {
+    			$_SESSION['error'] = 'Wrong username or password.';
 	        	redirect('../users/login.php');
 	        	exit;
-	        } else {
-    			password_verify($_POST['password'], $user[0]['password']);
+	        }  else {
 	 			$_SESSION['username'] = strtolower($username);
 	 			$_SESSION['success'] = "You have been logged in successfully!";
-	 				redirect('../users/profile.php');
+ 				redirect('../users/profile.php');
 	        }
 	    }
 	}

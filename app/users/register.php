@@ -52,6 +52,8 @@ try {
 			$firstname = ucwords($firstname);
 			$lastname = ucwords($lastname);
 
+			$password = password_hash($password, PASSWORD_DEFAULT);
+
 			$stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
 			$stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
 			$stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -62,14 +64,12 @@ try {
 
 			if (!$stmt) {
 				$_SESSION['error'] = 'There was an error with registration.';
-				die(var_dump($pdo->errorInfo()));
+				// die(var_dump($pdo->errorInfo()));
 			} else {
-				password_hash($_POST['password'], PASSWORD_DEFAULT);
+				$_SESSION['success'] = 'Registration successfully completed!';
+				redirect('/../views/login-view.php');
+				exit;
 			}
-
-			$_SESSION['success'] = 'Registration successfully completed!';
-			redirect('../views/login-view.php');
-			exit;
 		}
 	}
 } catch (PDOException $e) {

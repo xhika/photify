@@ -8,7 +8,7 @@ try {
 
 
 	$editId = $_GET['id'];
-	$member_id = $_SESSION['username'];
+	$memberId = $_SESSION['username'];
 
 	if (isset($_POST['edit'])) {
 
@@ -29,7 +29,7 @@ try {
 
 	if (move_uploaded_file($image['tmp_name'], $path)) {
 
-		$sql = 'UPDATE posts SET title = :title, content = :content, filepath = :image, date = :date WHERE id = :editId';
+		$sql = 'UPDATE posts SET title = :title, content = :content, filepath = :image, date = :date WHERE id = :editId AND user_id = :memberId';
 
 				$stmt = $pdo->prepare($sql);
 				$stmt->bindParam(':title', $title, PDO::PARAM_STR);
@@ -37,6 +37,7 @@ try {
 				$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
 				$stmt->bindParam(':date', $date, PDO::PARAM_STR);
 				$stmt->bindParam(':editId', $editId, PDO::PARAM_INT);
+				$stmt->bindParam(':memberId', $memberId, PDO::PARAM_STR);
 				$stmt->execute();
 
 				if (!$stmt) {

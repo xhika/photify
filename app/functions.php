@@ -151,8 +151,6 @@ function getImage(PDO $pdo)
 
 		return $results;
 
-
-
 	} catch (Exception $e) {
 		echo 'Something went wrong with the connection: ' . $e->getMessage();
 	}
@@ -166,6 +164,7 @@ function defaultUser()
 		return $filepath = '/no-avatar.png';
 	}
 }
+
 /**
  * Here we get how long time ago a post was created.
  */
@@ -185,7 +184,7 @@ function timeAgo($date)
 	$years   = round($seconds / 31553280); //(365+365+365+365+366)/5 * 24 * 60 * 60
 
 	if ($seconds <= 60) {
-		return 'Just now';
+		return "Just now";
 	} elseif ($minutes <= 60) {
 		if ($minutes == 1) {
 			return "one minute ago";

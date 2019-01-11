@@ -5,7 +5,12 @@ declare(strict_types=1);
 
 try {
 
-	$stmt = $pdo->prepare('SELECT * FROM posts ORDER BY date DESC');
+	$stmt = $pdo->prepare('SELECT *, 
+		(
+			SELECT COUNT(*) FROM likes WHERE post_id = posts.id
+		) AS likes
+		FROM posts 
+		ORDER BY date DESC');
 
 	if (!$stmt) {
 		die(var_dump($pdo->errorInfo()));
@@ -16,10 +21,13 @@ try {
 	$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	$userId = $_SESSION['username'];
+
 	$sql = 'SELECT * FROM images WHERE user_id = :userId';
 	$stmt = $pdo->prepare($sql);
+
 	$stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
 	$stmt->execute();
+
 	$results = $stmt->fetch(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {

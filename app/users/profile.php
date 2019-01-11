@@ -39,7 +39,9 @@ $bio = $userResult['bio'];
 					<img class="border block mx-auto w-full h-64 bg-auto" src="/img/<?= $post['filepath']; ?>">
 				<div class="flex flex-col justify-around">
 					<span class="bg-teal text-white p-4 leading-normal"><?= $post['content']; ?>
-						<i class="like cursor-pointer float-right fas fa-heart" data-like="<?= $post['id']; ?>"></i>
+						<i class="like cursor-pointer float-right fas fa-heart" data-like="<?= $post['id']; ?>"> 
+							<span class="font-sans"><?= $post['likes']; ?></span>
+						</i>
 					</span>
 					<p class="pl-4 pt-2 font-thin leading-tight text-grey bg-white"><?= timeAgo($post['date']); ?></p>
 			<?php if($_SESSION['username'] == $post['user_id']) :?>

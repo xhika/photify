@@ -1,22 +1,17 @@
 'use strict';
 
-const url = `/app/posts/like.php`;
-
-
-
 const buttons = document.querySelectorAll('.like');
 
 buttons.forEach((button) => {
-
 	
 	button.addEventListener('click', (e) => {
-		let clicks = Number(button.innerText);
+
 		const postId = button.getAttribute('data-like');
-
 		const formData = new FormData();
-		formData.append('like', postId);
 
-		fetch(url, {
+		formData.append('postId', postId);
+
+		fetch(`/app/posts/like.php`, {
 			method: 'POST',
 			body: formData
 		})
@@ -24,16 +19,17 @@ buttons.forEach((button) => {
 			return response.json();
 		})
 		.then(data => {
-			//console.log(data);
-		});
+			//console.log(data.action)
+			let span = button.querySelector('span');
+			let clicks = Number(span.innerText);
 
-		if (button.innerText === '1') {
-			console.log(button.innerText)
-			clicks = "";
-		} else {
-			clicks += 1;
-		}
-		button.innerText = clicks;
+			if (data.action === 'liked') {
+				clicks += 1;
+			} else {
+				clicks -= 1;
+			}
+			span.innerText = ' ' + clicks;
+		});
 	})
 })
 

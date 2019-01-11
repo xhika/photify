@@ -1,14 +1,4 @@
-<?php require __DIR__.'/../../views/header.php';
-
-$imageResult = getImage($pdo);
-$filepath = $imageResult['filepath'];
-
-
-$userResult =  getUserInfo($pdo);
-$bio = $userResult['bio'];
-
-
-?>
+<?php require __DIR__.'/../../views/header.php'; ?>
 
 	<article class="h-screen">
 		<div class="max-w-md mx-auto text-center uppercase">
@@ -33,7 +23,7 @@ $bio = $userResult['bio'];
 	<?php foreach ($posts as $post) : ?>
 			<div class="mb-8 md:max-w-sm mx-auto">
 				<p class="bg-teal p-4 text-white text-lg font-semibold">
-					<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= $results['filepath']; ?>">
+					<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= getAvatar($post['avatar']); ?>">
 					<?= $post['user_id']; ?>
 				</p>
 					<img class="border block mx-auto w-full h-64 bg-auto" src="/img/<?= $post['filepath']; ?>">

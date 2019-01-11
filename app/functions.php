@@ -148,21 +148,30 @@ function getImage(PDO $pdo)
 		if (empty($results['filepath'])) {
 			$results['filepath'] = '/no-avatar.png';
 		}
-
 		return $results;
 
 	} catch (Exception $e) {
 		echo 'Something went wrong with the connection: ' . $e->getMessage();
 	}
 }
-function defaultUser()
+/**
+ * Here we get default values for user
+ */
+function getAvatar($avatar) 
+{
+	if (empty($avatar)) {
+		return '/no-avatar.png';
+	}
+
+	return $avatar;
+}
+
+function defaultBio($bio)
 {
 	if (empty($bio)) {
-		return $bio = "<i>Change me in settings.</i>";
+		return "<i>Change me in settings.</i>";
 	}
-	if (empty($filepath)) {
-		return $filepath = '/no-avatar.png';
-	}
+	return $bio;
 }
 
 /**

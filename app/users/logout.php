@@ -9,4 +9,5 @@ require __DIR__.'/../autoload.php';
 session_unset();
 session_destroy();
 
-header('Location:/views/login-view.php');
+redirect('/views/login-view.php');
+

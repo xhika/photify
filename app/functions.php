@@ -64,6 +64,7 @@ function noProfile()
 function getUserInfo(PDO $pdo)
 {
 	try {
+		if ($_SESSION) {
 			$username = $_SESSION['username'];
 			$sql = 'SELECT * FROM users WHERE username = :username';
 			$stmt = $pdo->prepare($sql);
@@ -76,8 +77,8 @@ function getUserInfo(PDO $pdo)
 				$results['bio'] = "<i>Change me in settings.</i>";
 			}
 			return $results;
-
-		} catch (Exception $e) {
+		}
+	} catch (Exception $e) {
 		echo 'Something went wrong with the connection: ' . $e->getMessage();
 	}
 }
@@ -137,19 +138,20 @@ function uploadImage($pdo)
 function getImage(PDO $pdo)
 {
 	try {
-		$user_id = $_SESSION['username'];
-		$sql = 'SELECT * FROM images WHERE user_id = :user_id';
-		$stmt = $pdo->prepare($sql);
-		$stmt->bindParam('user_id', $user_id, PDO::PARAM_STR);
-		$stmt->execute();
+		if ($_SESSION) {
+			$username = $_SESSION['username'];
+			$sql = 'SELECT * FROM images WHERE user_id = :username';
+			$stmt = $pdo->prepare($sql);
+			$stmt->bindParam('username', $username, PDO::PARAM_STR);
+			$stmt->execute();
 
-		$results = $stmt->fetch(PDO::FETCH_ASSOC);
+			$results = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		if (empty($results['filepath'])) {
-			$results['filepath'] = '/no-avatar.png';
+			if (empty($results['filepath'])) {
+				$results['filepath'] = '/no-avatar.png';
+			}
+			return $results;
 		}
-		return $results;
-
 	} catch (Exception $e) {
 		echo 'Something went wrong with the connection: ' . $e->getMessage();
 	}
@@ -157,7 +159,7 @@ function getImage(PDO $pdo)
 /**
  * Here we get default values for user
  */
-function getAvatar($avatar) 
+function getAvatar($avatar)
 {
 	if (empty($avatar)) {
 		return '/no-avatar.png';

@@ -21,11 +21,5 @@ $config = require __DIR__.'/config.php';
 $pdo = new PDO($config['database_path']);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Getting image information from database
-$imageResult = getImage($pdo);
-$filepath = $imageResult['filepath'];
 
-// Getting user information from database
-$userResult =  getUserInfo($pdo);
-$bio = $userResult['bio'];
 

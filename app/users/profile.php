@@ -1,4 +1,12 @@
-<?php require __DIR__.'/../../views/header.php'; ?>
+<?php require __DIR__.'/../../views/header.php';
+// Getting image information from database
+$imageResult = getImage($pdo);
+$filepath = $imageResult['filepath'];
+
+// Getting user information from database
+$userResult =  getUserInfo($pdo);
+$bio = $userResult['bio'];
+ ?>
 
 	<article class="h-screen">
 		<div class="max-w-md mx-auto text-center uppercase">
@@ -29,7 +37,7 @@
 					<img class="border block mx-auto w-full h-64 bg-auto" src="/img/<?= $post['filepath']; ?>">
 				<div class="flex flex-col justify-around">
 					<span class="bg-teal text-white p-4 leading-normal"><?= $post['content']; ?>
-						<i class="like cursor-pointer float-right fas fa-heart" data-like="<?= $post['id']; ?>"> 
+						<i class="like cursor-pointer float-right fas fa-heart" data-like="<?= $post['id']; ?>">
 							<span class="font-sans"><?= $post['likes']; ?></span>
 						</i>
 					</span>

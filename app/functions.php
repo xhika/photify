@@ -64,20 +64,18 @@ function noProfile()
 function getUserInfo(PDO $pdo)
 {
 	try {
-		if ($_SESSION) {
-			$username = $_SESSION['username'];
-			$sql = 'SELECT * FROM users WHERE username = :username';
-			$stmt = $pdo->prepare($sql);
-			$stmt->bindParam(':username', $username, PDO::PARAM_STR);
-			$stmt->execute();
+		$username = $_SESSION['username'];
+		$sql = 'SELECT * FROM users WHERE username = :username';
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+		$stmt->execute();
 
-			$results = $stmt->fetch(PDO::FETCH_ASSOC);
+		$results = $stmt->fetch(PDO::FETCH_ASSOC);
 
-			if (empty($results['bio'])) {
-				$results['bio'] = "<i>Change me in settings.</i>";
-			}
-			return $results;
+		if (empty($results['bio'])) {
+			$results['bio'] = "<i>Change me in settings.</i>";
 		}
+		return $results;
 	} catch (Exception $e) {
 		echo 'Something went wrong with the connection: ' . $e->getMessage();
 	}
@@ -138,20 +136,18 @@ function uploadImage($pdo)
 function getImage(PDO $pdo)
 {
 	try {
-		if ($_SESSION) {
-			$username = $_SESSION['username'];
-			$sql = 'SELECT * FROM images WHERE user_id = :username';
-			$stmt = $pdo->prepare($sql);
-			$stmt->bindParam('username', $username, PDO::PARAM_STR);
-			$stmt->execute();
+		$username = $_SESSION['username'];
+		$sql = 'SELECT * FROM images WHERE user_id = :username';
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam('username', $username, PDO::PARAM_STR);
+		$stmt->execute();
 
-			$results = $stmt->fetch(PDO::FETCH_ASSOC);
+		$results = $stmt->fetch(PDO::FETCH_ASSOC);
 
-			if (empty($results['filepath'])) {
-				$results['filepath'] = '/no-avatar.png';
-			}
-			return $results;
+		if (empty($results['filepath'])) {
+			$results['filepath'] = '/no-avatar.png';
 		}
+		return $results;
 	} catch (Exception $e) {
 		echo 'Something went wrong with the connection: ' . $e->getMessage();
 	}

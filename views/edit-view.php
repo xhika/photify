@@ -5,6 +5,7 @@ require __DIR__.'/../views/header.php';
 
 try {
 	$username = $_SESSION['username'];
+	$postId = $_GET['id'];
 
 	$stmt = $pdo->prepare('SELECT *,
 		(
@@ -15,9 +16,11 @@ try {
 		) AS avatar
 		FROM posts
 		WHERE user_id = :username
+		AND id = :postId
 		ORDER BY date DESC');
 
 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+	$stmt->bindParam(':postId', $postId, PDO::PARAM_INT);
 	$stmt->execute();
 	$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

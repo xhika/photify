@@ -45,7 +45,7 @@ foreach ($posts as $post) : ?>
 		</div>
 		<div>
 			<label for="image" class="mt-4 py-2 px-5 bg-teal m-2 rounded text-white font-thin"><i class="far fa-image"></i>
-			<input class="hidden" type="file" name="image" id="image" required>
+			<input class="hidden" type="file" name="image" id="image" onchange="previewFile()" required>
 			</label>
 			<button type="submit" name="edit" class="mt-4 py-2 px-5 bg-teal m-2 rounded text-white font-thin">Update</button>
 			<a class="mt-4 py-2 px-5 bg-red m-2 rounded text-white font-thin no-underline" href="/app/users/profile.php">Cancel</a>
@@ -53,5 +53,6 @@ foreach ($posts as $post) : ?>
 	</form>
 </div>
 <?php endforeach; ?>
+<?php require __DIR__.'/footer.php'; ?>
 
 

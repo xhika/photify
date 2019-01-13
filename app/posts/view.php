@@ -5,14 +5,14 @@ declare(strict_types=1);
 
 try {
 
-	$stmt = $pdo->prepare('SELECT *, 
+	$stmt = $pdo->prepare('SELECT *,
 		(
 			SELECT COUNT(*) FROM likes WHERE post_id = posts.id
 		) AS likes,
 		(
 			SELECT filepath FROM images WHERE images.user_id = posts.user_id
 		) AS avatar
-		FROM posts 
+		FROM posts
 		ORDER BY date DESC');
 
 	if (!$stmt) {
@@ -26,4 +26,8 @@ try {
 } catch (PDOException $e) {
 	echo "Something went wrong with loading posts: " . $e->getMessage();
 }
+
+
+
+
 

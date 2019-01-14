@@ -6,7 +6,7 @@ $imageResult = getAvatar($pdo);
 $filepath = $imageResult['filepath'];
 ?>
 
-<div class="bg-grey-lighter p-6 mx-auto text-center text-teal h-screen">
+<div class="bg-grey-lighter p-6 mx-auto text-center text-teal h-auto">
 	<h1 class="uppercase"><?= $_SESSION['username']; ?></h1>
 	<img class="mt-6 border block mx-auto h-32 rounded-full shadow-lg mb-6" src="/img/<?= $filepath; ?>">
 

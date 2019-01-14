@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/../views/header.php';
 ?>
-<div class="bg-grey-lighter p-6 h-screen">
+<div class="bg-grey-lighter p-6 h-auto">
 	<form method="post" class="text-center" enctype="multipart/form-data" action="/app/posts/store.php">
 		<div class="mb-8 md:max-w-sm mx-auto">
 			<label for="image" class="mt-4 m-2 hover:bg-teal-lightest">

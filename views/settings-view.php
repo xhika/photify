@@ -2,7 +2,7 @@
 require __DIR__.'/../views/header.php';
 require __DIR__.'../../app/users/settings.php';
 
-$imageResult = getImage($pdo);
+$imageResult = getAvatar($pdo);
 $filepath = $imageResult['filepath'];
 ?>
 

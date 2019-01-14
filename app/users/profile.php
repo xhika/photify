@@ -1,7 +1,7 @@
 <?php require __DIR__.'/../../views/header.php';
 // Getting image information from database
-$imageResult = getImage($pdo);
-$filepath = $imageResult['filepath'];
+$imageResult = getAvatar($pdo);
+$avatar = $imageResult['filepath'];
 
 // Getting user information from database
 $userResult =  getUserInfo($pdo);
@@ -12,7 +12,7 @@ $bio = $userResult['bio'];
 		<div class="max-w-md mx-auto text-center uppercase">
  	   		<h1 class="m-0 mb-2 p-4 text-teal">Welcome</h1>
 				<span class="bg-teal mb-2 py-2 px-3 font-semibold rounded text-white"><?= $_SESSION['username']; ?></span>
-				<img class="mt-6 border block mx-auto h-32 rounded-full shadow-lg" src="/img/<?= $filepath; ?>">
+				<img class="mt-6 border block mx-auto h-32 rounded-full shadow-lg" src="/img/<?= $avatar; ?>">
 					<?php require __DIR__.'/../../views/upload-view.php'; ?>
 				<h2 class="tracking-wide normal-case font-normal text-teal-dark text-xl mt-4 mb-4">Biography</h2>
 				<div class="bg-grey-light h-auto w-2/3 lg:w-1/3 rounded mx-auto p-4 normal-case font-light">
@@ -31,7 +31,7 @@ $bio = $userResult['bio'];
 	<?php foreach ($posts as $post) : ?>
 			<div class="mb-8 md:max-w-sm mx-auto">
 				<p class="bg-teal p-4 text-white text-lg font-semibold">
-					<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= getAvatar($post['avatar']); ?>">
+					<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($post['avatar']); ?>">
 					<?= $post['user_id']; ?>
 				</p>
 					<img class="border block mx-auto w-full h-64 bg-auto" src="/img/<?= $post['filepath']; ?>">

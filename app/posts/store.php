@@ -9,7 +9,7 @@ require __DIR__.'/../../views/new-post.php';
 
 try {
 
-	if (isset($_POST['title'], $_POST['content'], $_POST['submit'])) {
+	if (isset($_POST['title'], $_POST['content'], $_POST['post'])) {
 		$post = $_POST;
 		$image = $_FILES['image'];
 

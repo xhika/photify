@@ -14,7 +14,7 @@ require __DIR__.'/../views/header.php';
 				<label for="image" class="mt-4 py-2 px-5 bg-teal m-2 rounded text-white font-thin"><i class="far fa-image"></i>
 				<input class="hidden" type="file" name="image" id="image" onchange="previewFile()" required>
 				</label>
-				<button type="submit" name="submit" class="mt-4 py-2 px-5 bg-teal m-2 rounded text-white font-thin">Post</button>
+				<button type="submit" name="post" class="mt-4 py-2 px-5 bg-teal m-2 rounded text-white font-thin">Post</button>
 			</div>
 	</form>
 </div>

@@ -83,7 +83,7 @@ function getUserInfo(PDO $pdo)
 /**
  * Here we upload filepath to db.
  */
-function uploadImage($pdo)
+function uploadImage(PDO $pdo)
 {
 	try {
 		if (isset($_POST['upload'])) {
@@ -107,13 +107,27 @@ function uploadImage($pdo)
 
 					$userId = $_SESSION['username'];
 
+					$sql = 'SELECT * FROM images WHERE user_id = :userId';
+					$stmt = $pdo->prepare($sql);
+					$stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+					$stmt->execute();
+					$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+					if ($row['filepath']) {
+						$sql = 'UPDATE images SET filepath = :image, user_id = :userId';
+						$stmt = $pdo->prepare($sql);
+
+						$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
+						$stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+						$stmt->execute();
+					}
+
 					$sql = 'INSERT INTO images (filepath, user_id) VALUES (:image, :userId)';
 
 					$stmt = $pdo->prepare($sql);
 
 					$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
 					$stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
-
 
 					$stmt->execute();
 
@@ -133,7 +147,7 @@ function uploadImage($pdo)
 /**
  * Here we're getting image data from db.
  */
-function getImage(PDO $pdo)
+function getAvatar(PDO $pdo)
 {
 	try {
 		$username = $_SESSION['username'];
@@ -155,7 +169,7 @@ function getImage(PDO $pdo)
 /**
  * Here we get default values for user
  */
-function getAvatar($avatar)
+function defaultAvatar($avatar)
 {
 	if (empty($avatar)) {
 		return '/no-avatar.png';

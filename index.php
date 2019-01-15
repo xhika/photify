@@ -1,4 +1,7 @@
-<?php require __DIR__.'/views/header.php'; ?>
+<?php
+require_once __DIR__.'/app/autoload.php';
+require __DIR__.'/views/header.php';
+?>
 
 	<article>
 		<div class="max-w-md mx-auto text-center uppercase mb-8">

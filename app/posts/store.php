@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+require_once __DIR__.'/../autoload.php';
 require __DIR__.'/../../views/new-post.php';
 
 // In this file we store/insert new posts in the database.

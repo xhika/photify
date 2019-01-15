@@ -1,4 +1,6 @@
-<?php require __DIR__.'/../../views/header.php';
+<?php
+require_once __DIR__.'/../../app/autoload.php';
+require __DIR__.'/../../views/header.php';
 // Getting image information from database
 $imageResult = getAvatar($pdo);
 $avatar = $imageResult['filepath'];
@@ -23,32 +25,13 @@ $bio = $userResult['bio'];
 				<button class="bg-green py-3 px-4 rounded font-semibold text-white mt-2"><a href="/../views/new-post.php" class="no-underline text-white">Create Post</a></button>
 				<button class="bg-red py-3 px-4 rounded font-semibold text-white mt-2"><a href="/../views/settings-view.php" class="no-underline text-white">Settings</a></button>
 			</div>
+			<div>
+				<h2 class="max-w-lg mx-auto text-center  pt-6 pb-6"><a href="/../feed.php" class="no-underline text-teal">Feed</a=""></h2>
+			</div>
 		</div>
 	</article>
 </div>
-<h2 class="max-w-lg mx-auto text-center text-teal pt-6 pb-6">Feed</h2>
-<?php  require __DIR__.'/../posts/view.php'; ?>
-	<?php foreach ($posts as $post) : ?>
-			<div class="mb-8 md:max-w-sm mx-auto">
-				<p class="bg-teal p-4 text-white text-lg font-semibold">
-					<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($post['avatar']); ?>">
-					<?= $post['user_id']; ?>
-				</p>
-					<img class="border block mx-auto w-full h-64 bg-auto" src="/img/<?= $post['filepath']; ?>">
-				<div class="flex flex-col justify-around">
-					<span class="bg-teal text-white p-4 leading-normal"><?= $post['content']; ?>
-						<i class="like cursor-pointer float-right fas fa-heart" data-like="<?= $post['id']; ?>">
-							<span class="font-sans"><?= $post['likes']; ?></span>
-						</i>
-					</span>
-					<p class="pl-4 pt-2 font-thin leading-tight text-grey bg-white"><?= timeAgo($post['date']); ?></p>
-			<?php if($_SESSION['username'] == $post['user_id']) :?>
-					<button class="bg-green mx-auto font-white w-1/6 rounded m-1 py-3"><a href="/app/posts/update.php?id=<?=$post['id']; ?>" class="no-underline text-white">Edit</a></button>
-					<button class="bg-red mx-auto font-white w-1/6 rounded m-1 py-3"><a href="/app/posts/delete.php?id=<?=$post['id']; ?>" class="no-underline text-white">Delete</a></button>
-			<?php endif;?>
-				</div>
-			</div>
-	<?php endforeach; ?>
 
 
-<?php require __DIR__.'/../../views/footer.php'; ?>
+
+<?php require PHOTOIFY_PATH.'/views/footer.php'; ?>

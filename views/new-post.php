@@ -1,5 +1,6 @@
 <?php
-require __DIR__.'/../views/header.php';
+require_once __DIR__.'/../app/autoload.php';
+require PHOTOIFY_PATH.'/views/header.php';
 ?>
 <div class="bg-grey-lighter p-6 h-auto">
 	<form method="post" class="text-center" enctype="multipart/form-data" action="/app/posts/store.php">
@@ -21,4 +22,4 @@ require __DIR__.'/../views/header.php';
 			</div>
 	</form>
 </div>
-<?php require __DIR__.'/../views/footer.php'; ?>
+<?php require PHOTOIFY_PATH.'/views/footer.php'; ?>

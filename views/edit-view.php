@@ -1,5 +1,6 @@
 <?php
-require __DIR__.'/../views/header.php';
+require_once __DIR__.'/../app/autoload.php';
+require PHOTOIFY_PATH.'/views/header.php';
 
 // Here we bring post info from database for specific user.
 

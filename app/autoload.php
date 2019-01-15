@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+define('PHOTOIFY_PATH', __DIR__.'/../');
+
 // Start the session engines.
 session_start();
 

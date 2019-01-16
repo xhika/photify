@@ -31,6 +31,11 @@ try {
 
 		$columns = implode(', ', $columns);
 
+		if (empty($email) and empty($bio) and empty($password)) {
+			$_SESSION['error'] = 'Please fill at least one field.';
+			redirect('/views/update-view.php');
+		}
+
 		$sql = "UPDATE users SET $columns WHERE username = :username";
 
 		$stmt = $pdo->prepare($sql);

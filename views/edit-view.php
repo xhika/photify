@@ -44,6 +44,7 @@ foreach ($posts as $post) : ?>
 			<label for="image" class="mt-4 m-2 hover:bg-teal-lightest">
 				<img class="border block mx-auto w-full h-64 bg-auto" src="/img/<?= $post['filepath']; ?>">
 			</label>
+			<p class="italic text-grey">Please select image before updating.</p>
 			<label for=title class="block font-bold uppercase tracking-wide pt-3">Subject:</label>
 			<input type="title" name="title" class="w-3/4 bg-grey-light rounded py-2 my-2 focus:bg-white" value="<?= $post['title'] ;?>">
 			<label for=content class="block font-bold uppercase tracking-wide pt-3">Post:</label>
@@ -53,7 +54,7 @@ foreach ($posts as $post) : ?>
 			<input class="hidden" type="file" name="image" id="image" onchange="previewFile()" required>
 			</label>
 			<button type="submit" name="edit" class="mt-4 py-2 px-5 bg-teal m-2 rounded text-white font-thin">Update</button>
-			<a class="mt-4 py-2 px-5 bg-red m-2 rounded text-white font-thin no-underline" href="/app/users/profile.php">Cancel</a>
+			<a class="mt-4 py-2 px-5 bg-red m-2 rounded text-white font-thin no-underline" href="/../../feed.php">Cancel</a>
 		</div>
 	</form>
 </div>

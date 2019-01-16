@@ -16,7 +16,7 @@ try {
 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 	$stmt->execute();
 
-	if (!stmt) {
+	if (!$stmt) {
 		$_SESSION['error'] = 'There was an error, please try again.';
 		redirect('/app/users/profile.php');
 		exit;

@@ -59,8 +59,9 @@ require __DIR__.'/app/posts/view.php';
 							</button>
 						</form>
 					</div>
+		<!--Here we let users edit or delete-->
 			<?php if($_SESSION['username'] === $post['user_id']) : ?>
-				<div class="bg-teal flex justify-around mt-2 mb-8 rounded p-2">
+				<div class="flex justify-around mt-2 mb-8 rounded p-2">
 					<a href="/app/posts/update.php?id=<?=$post['id']; ?>" class="bg-green font-white w-1/6 rounded m-1 py-3 text-center no-underline text-white">Edit</a>
 					<a href="/app/posts/delete.php?id=<?=$post['id']; ?>" class="bg-red font-white w-1/6 rounded m-1 py-3 text-center no-underline text-white">Delete</a>
 				</div>

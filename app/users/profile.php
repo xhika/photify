@@ -21,7 +21,6 @@ $bio = $userResult['bio'];
 					<?= $bio; ?>
 				</div>
 			<div class="mt-4">
-				<button class="bg-teal py-3 px-4 rounded font-semibold text-white mt-2">Profile</button>
 				<button class="bg-green py-3 px-4 rounded font-semibold text-white mt-2"><a href="/../views/new-post.php" class="no-underline text-white">Create Post</a></button>
 				<button class="bg-red py-3 px-4 rounded font-semibold text-white mt-2"><a href="/../views/settings-view.php" class="no-underline text-white">Settings</a></button>
 			</div>

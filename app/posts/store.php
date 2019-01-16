@@ -47,7 +47,7 @@ try {
 		$stmt->execute();
 
 		$_SESSION['success'] = 'Your post was successful.';
-		redirect('/app/users/profile.php');
+		redirect('/../../feed.php');
 		exit;
 	}
 }

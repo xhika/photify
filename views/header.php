@@ -9,7 +9,7 @@
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/styles/main.css">
 </head>
-<body>
+<body class="bg-grey-lighter">
     <?php require __DIR__.'/navigation.php'; ?>
 
     <div class="w-full bg-grey-lighter h-screen pb-8">

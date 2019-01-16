@@ -1,6 +1,6 @@
 
 <?php if(isset($_SESSION['username'])) : ?>
-<ul class="list-reset flex bg-grey-lightest pin-b sticky">
+<ul class="list-reset flex bg-grey-lightest pin-b sticky mt-8">
 	<li class="flex">
 		<a class="text-2xl text-center block font-semibold text-teal-light bg-grey-lighter hover:bg-teal-darker py-4 px-4 no-underline" href="/index.php"><i class="fas fa-home"></i></a>
 	</li>

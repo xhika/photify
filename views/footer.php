@@ -5,7 +5,7 @@
 		<a class="text-2xl text-center block font-semibold text-teal-light bg-grey-lighter hover:bg-teal-darker py-4 px-4 no-underline" href="/index.php"><i class="fas fa-home"></i></a>
 	</li>
 	<li class="flex">
-		<a class="text-2xl text-center block font-semibold text-teal-light bg-grey-lighter hover:bg-teal-darker py-4 px-4 no-underline" href="/feed.php"><i class="fas fa-rss-square"></i></a>
+		<a class="text-2xl text-center block font-semibold text-teal-light bg-grey-lighter hover:bg-teal-darker py-4 px-4 no-underline" href="/feed.php"><i class="fab fa-uikit"></i></a>
 	</li>
 	<li class="flex-1">
 		<a class="text-2xl text-center block font-semibold text-teal-light bg-grey-lighter hover:bg-teal-darker py-4 px-4 no-underline" href="/../views/new-post.php"><i class="fas fa-pen"></i></a>

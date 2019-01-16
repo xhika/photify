@@ -12,4 +12,4 @@
 <body>
     <?php require __DIR__.'/navigation.php'; ?>
 
-    <div class="w-full bg-grey-lighter h-auto pb-8">
+    <div class="w-full bg-grey-lighter h-screen pb-8">

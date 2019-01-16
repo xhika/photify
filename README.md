@@ -1,5 +1,5 @@
 # photoify
-![Image](https://media.giphy.com/media/pJjKzRqY9HwME/giphy.gif)
+![screenshot](preview.gif)
 
 
 

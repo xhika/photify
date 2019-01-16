@@ -17,4 +17,5 @@ require PHOTOIFY_PATH.'/app/users/settings-update.php';
 		<button type="submit" name="save" class="mx-auto block bg-teal-dark py-2 mt-2 px-4 rounded text-white">Save</button>
 	</form>
 </div>
+
 <?php require __DIR__.'/footer.php'; ?>

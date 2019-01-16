@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-require PHOTOIFY_PATH.'/views/register-view.php';
+require __DIR__.'/../../views/register-view.php';
 
 try {
 

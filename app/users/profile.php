@@ -26,7 +26,7 @@ $bio = $userResult['bio'];
 				<button class="bg-red py-3 px-4 rounded font-semibold text-white mt-2"><a href="/../views/settings-view.php" class="no-underline text-white">Settings</a></button>
 			</div>
 			<div>
-				<h2 class="max-w-lg mx-auto text-center  pt-6 pb-6"><a href="/../feed.php" class="no-underline text-teal">Feed</a=""></h2>
+				<h2 class="max-w-lg mx-auto text-center pt-6 pb-6"><a href="/../feed.php" class="no-underline text-teal">Feed</a></h2>
 			</div>
 		</div>
 	</article>

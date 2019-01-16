@@ -10,7 +10,7 @@ try {
 	if (isset($_POST['send'])) {
 		$postId = $_GET['id'];
 		$user = $_SESSION['username'];
-		$comment = $_POST['comment'];
+		$comment = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
 
 		$sql = 'INSERT INTO comments (user_id, post_id, comment) VALUES (:username, :postId, :comment)';
 		$stmt = $pdo->prepare($sql);

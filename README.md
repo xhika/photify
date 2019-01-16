@@ -15,6 +15,8 @@ To clone using bash:
 
 
 ## Testers from class
+[Hanna](https://github.com/hannaell)
+[Amin](https://github.com/Amin-Mohamed)
 
 
 ## License

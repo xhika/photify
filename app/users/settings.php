@@ -1,19 +1,14 @@
 <?php
 declare(strict_types=1);
 
-getuserInfo($pdo);
+$user = getuserInfo($pdo);
 
 
 // In here we are retrieving info about user with getUserInfo function.
-$firstname =  getUserInfo($pdo);
-$lastname =  getUserInfo($pdo);
-$email =  getUserInfo($pdo);
-$bio =  getUserInfo($pdo);
-$password =  getUserInfo($pdo);
 
-$firstname = ucfirst($firstname['firstname']);
-$lastname = ucfirst($lastname['lastname']);
-$email = ucfirst($email['email']);
-$bio = ucfirst($bio['bio']);
-$password = $password['password'];
+$firstname = ucfirst($user['firstname']);
+$lastname = ucfirst($user['lastname']);
+$email = ucfirst($user['email']);
+$bio = ucfirst($user['bio'] ?? '');
+$password = $user['password'];
 

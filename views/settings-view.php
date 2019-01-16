@@ -22,9 +22,9 @@ $filepath = $imageResult['filepath'];
 				<span class="font-normal">Email</span>
 				<p class="pb-4"> <?=  $email; ?></p>
 			</div>
-			<div class="flex text-teal-dark justify-between">
+			<div class="flex text-teal-dark justify-between pb-4">
 				<span class="font-normal">Bio</span>
-				<p class="pb-4"> <?=  $bio; ?></p>
+				<?=  defaultBio($bio); ?>
 			</div>
 			<div class="flex text-teal-dark justify-between">
 				<span class="font-normal">Password</span>

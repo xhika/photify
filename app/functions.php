@@ -72,9 +72,6 @@ function getUserInfo(PDO $pdo)
 
 		$results = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		if (empty($results['bio'])) {
-			$results['bio'] = "<i>Change me in settings.</i>";
-		}
 		return $results;
 	} catch (Exception $e) {
 		echo 'Something went wrong with the connection: ' . $e->getMessage();
@@ -90,7 +87,9 @@ function uploadImage(PDO $pdo)
 
 			$image = $_FILES['image'];
 
-			if ($image['type'] !== 'image/png') {
+			$types = ['image/png', 'image/jpg', 'image/jpeg'];
+
+			if (in_array($image['image']['type'], $types)) {
 				$_SESSION['error'] = 'The image file type is not allowed.';
 				redirect('/app/users/profile.php');
 			} else {
@@ -114,7 +113,8 @@ function uploadImage(PDO $pdo)
 					$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 					if ($row['filepath']) {
-						$sql = 'UPDATE images SET filepath = :image, user_id = :userId';
+
+						$sql = 'UPDATE images SET filepath = :image WHERE user_id = :userId';
 						$stmt = $pdo->prepare($sql);
 
 						$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
@@ -181,7 +181,7 @@ function defaultAvatar($avatar)
 function defaultBio($bio)
 {
 	if (empty($bio)) {
-		return "<i>Change me in settings.</i>";
+		return "<p class='italic'>Change me in settings.</p>";
 	}
 	return $bio;
 }

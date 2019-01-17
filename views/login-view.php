@@ -3,7 +3,7 @@ require_once __DIR__.'/../app/autoload.php';
 require PHOTOIFY_PATH.'/views/header.php';
 ?>
 
-<div class="bg-grey-lighter p-6 h-screen">
+<div class="bg-grey-lighter p-6 h-screen flex flex-col justify-center">
 	<form method="post" class="text-center" action="/app/users/login.php">
 		<label for="username" class="block font-bold uppercase tracking-wide">Username:</label>
 		<input type="text" name="username" class="bg-grey-light rounded py-2 border-solid border-black my-2">

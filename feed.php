@@ -14,7 +14,7 @@ require __DIR__.'/app/posts/view.php';
 	<div class="bg-grey-lighter md:max-w-sm mx-auto">
 		<div class="bg-teal p-4 text-white text-lg font-semibold">
 			<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($post['avatar']); ?>">
-			<?= $post['user_id']; ?>
+			<a href="/app/users/visit.php?id=<?=$post['user_id']?>" class="no-underline text-white"><?= $post['user_id']; ?></a>
 		<!--Here we let users edit or delete-->
 			<?php if($_SESSION['username'] === $post['user_id']) : ?>
 				<a href="/app/posts/delete.php?id=<?=$post['id']; ?>"><i class="float-right mb-2 text-2xl text-red-dark p-3 text-center no-underline text-white fas fa-backspace"></i></a>
@@ -51,7 +51,7 @@ require __DIR__.'/app/posts/view.php';
 				<?php if ($post['id'] === $comment['post_id']) : ?>
 					<div class="font-bold p-1 bg-teal text-white rounded">
 						<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($comment['avatar']); ?>">
-						<?= $comment['user_id'];?>
+						<a href="/app/users/visit.php?id=<?=$comment['user_id']?>" class="no-underline text-white"><?= $comment['user_id'];?></a>
 					</div>
 					<div class="m-2">
 						<p class="p-2 text-grey-darkest"><?= $comment['comment']; ?></p>

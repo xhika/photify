@@ -74,7 +74,6 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 							<h1 class="bg-teal text-white font-semibold leading-normal">
 								<?= $post['title']; ?>
 							</h1>
-
 						</div>
 						<p><?= $post['content']; ?></p>
 						<i class="like cursor-pointer float-right fas fa-heart" data-like="<?= $post['id']; ?>">

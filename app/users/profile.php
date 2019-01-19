@@ -30,7 +30,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <article>
 	<div class="max-w-md mx-auto text-center ">
-		<h1 class="m-0 mb-2 p-4 text-teal uppercase">Welcome</h1>
+		<h1 class="m-0 mb-2 p-4 text-teal uppercase tracking-wide">Welcome</h1>
 		<span class="bg-teal mb-2 py-2 px-3 font-semibold rounded text-white"><?= $_SESSION['username']; ?></span>
 		<?php require __DIR__.'/../../views/upload-view.php'; ?>
 		<h2 class="tracking-wide normal-case font-normal text-teal-dark text-xl mt-4 mb-4">Biography</h2>
@@ -50,7 +50,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			<h2 class="text-teal pb-4">Photos</h2>
 		<?php
 			if (!$posts) {
-				echo "<div class='p-2 bg-green text-1xl text-white text-center  tracking-wide'>You have no posts, create one 😁</div>";
+				echo "<div class='p-2 bg-green text-1xl text-white text-center tracking-wide'>You have no posts, create one 😁</div>";
 			}
 		?>
 	</div>
@@ -106,8 +106,8 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						<?php endif; ?>
 					<?php endforeach; ?>
 					<form action ="/app/posts/comments.php?id=<?=$posts['id'];?>" method="post" class="flex">
-						<input class="w-3/4 pl-4 pr-2 bg-grey-light h-12 rounded-full focus:bg-white" type="text" name="comment" placeholder="Write something nice ☺️">
-						<button type="submit" name="send" class="ml-2 mx-auto py-2 px-3 bg-teal rounded text-white font-thin">
+						<input class="w-3/4 pl-4 pr-2 bg-grey-light h-12 rounded-full outline-none focus:bg-white focus:border-teal border-2 border-grey-light rounded py-2 border-solid border-black my-2 shadow" type="text" name="comment" placeholder="Write something nice ☺️">
+						<button type="submit" name="send" class="ml-2 mx-auto m-2 px-3 bg-teal rounded text-white font-thin">
 							<a class="no-underline text-white">Send</a>
 						</button>
 					</form>

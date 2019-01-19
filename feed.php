@@ -6,7 +6,7 @@ require __DIR__.'/app/posts/view.php';
 
 ?>
 <h2 class="max-w-lg mx-auto text-center pt-6 pb-6">
-	<a href="/../feed.php" class="block no-underline text-teal text-4xl">Feed</a>
+	<a href="/../feed.php" class="block no-underline text-teal text-4xl tracking-wide">Feed</a>
 	<i class="text-teal fab fa-uikit mt-4 text-5xl"></i>
 </h2>
 
@@ -59,8 +59,8 @@ require __DIR__.'/app/posts/view.php';
 				<?php endif; ?>
 			<?php endforeach; ?>
 			<form action ="/app/posts/comments.php?id=<?=$post['id'];?>" method="post" class="flex">
-				<input class="w-3/4 pl-4 pr-2 bg-grey-light h-12 rounded-full focus:bg-white" type="text" name="comment" placeholder="Write something nice ☺️">
-				<button type="submit" name="send" class="ml-2 mx-auto py-2 px-3 bg-teal rounded text-white font-thin">
+				<input class="w-3/4 pl-4 pr-2 bg-grey-light h-12 rounded-full outline-none focus:bg-white focus:border-teal border-2 border-grey-light rounded py-2 border-solid border-black my-2 shadow" type="text" name="comment" placeholder="Write something nice ☺️">
+				<button type="submit" name="send" class="ml-2 mx-auto m-2 px-3 bg-teal rounded text-white font-thin">
 					<a class="no-underline text-white">Send</a>
 				</button>
 			</form>

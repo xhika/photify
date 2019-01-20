@@ -11,10 +11,10 @@ require __DIR__.'/views/header.php';
 				<div class=" flex flex-col">
 					<a href="/app/users/login.php" class="w-1/3 mx-auto hover:bg-teal-dark m-3 shadow-md rounded no-underline text-white bg-teal-darker py-2 px-3 uppercase font-semibold">Login</a>
 					<a href="/app/users/register.php" class="w-1/3 mx-auto hover:bg-teal-dark m-3 shadow-md rounded no-underline text-white bg-teal-darker py-2 px-3 uppercase font-semibold">Register</a>
-					<img src="/img/phone-hand2.png" class="mt-8 pin-b">
 				</div>
 			</div>
 		</div>
+		<img src="/img/phone-hand2.png">
 	</article>
 </div><!--End div from header.php-->
 

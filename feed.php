@@ -35,17 +35,9 @@ require __DIR__.'/app/posts/view.php';
 			<p class="pl-4 pt-2 font-thin leading-tight text-grey"><?= timeAgo($post['date']); ?></p>
 			<div class="pl-4 p-2 pb-8 pt-8 mx-auto w-5/6">
 
-				<?php
-					// Bring avatar from images table & all from comments table
-				$sql = 'SELECT *,
-				(
-				SELECT filepath FROM images WHERE images.user_id = comments.user_id
-			) AS avatar FROM comments';
-
-			$stmt = $pdo->prepare($sql);
-			$stmt->execute();
-
-			$comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		<?php
+		// Bring avatar from images table & all from comments table
+		$comments = getComments($pdo);
 
 			foreach ($comments as $comment) : ?>
 				<?php if ($post['id'] === $comment['post_id']) : ?>

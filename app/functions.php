@@ -16,6 +16,18 @@ if (!function_exists('redirect')) {
 		exit;
 	}
 }
+function getComments(PDO $pdo)
+{
+	$sql = 'SELECT *,
+				(
+					SELECT filepath FROM images WHERE images.user_id = comments.user_id
+				) AS avatar FROM comments';
+
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute();
+
+	return $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 /**
  * Using $_SESSION to style upon success/error
  */

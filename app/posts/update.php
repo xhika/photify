@@ -4,58 +4,65 @@ declare(strict_types=1);
 
 require __DIR__.'/../../views/edit-view.php';
 
+// Here we can edit posts
+
 try {
 
 
 	$editId = $_GET['id'];
-	$memberId = $_SESSION['username'];
+	$username = getUserinfo($pdo);
+	$username = $username['username'];
 
-	if (isset($_POST['edit'])) {
+	// Compare session username with db username
+		if ($username === $_SESSION['username']) {
 
-		$image = $_FILES['image'];
+			if (isset($_POST['edit'])) {
 
-		$title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
-		$content = filter_var($_POST['content'], FILTER_SANITIZE_STRING);
+				$image = $_FILES['image'];
 
-		$date = date('Y-m-d H:i:s');
-		$userId = $_SESSION['username'];
+				$title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
+				$content = filter_var($_POST['content'], FILTER_SANITIZE_STRING);
 
-		$path = __DIR__.'/../../img/';
+				$date = date('Y-m-d H:i:s');
 
-		$extension = pathinfo($image['name'], PATHINFO_EXTENSION);
 
-		$filename = uniqid().'.'.$extension;
-		$path .= $filename;
+				$path = __DIR__.'/../../img/';
 
-		if (move_uploaded_file($image['tmp_name'], $path)) {
+				$extension = pathinfo($image['name'], PATHINFO_EXTENSION);
 
-			$sql = 'UPDATE posts SET title = :title, content = :content, filepath = :image, date = :date WHERE id = :editId AND user_id = :memberId';
+				$filename = uniqid().'.'.$extension;
+				$path .= $filename;
 
-			$stmt = $pdo->prepare($sql);
-			$stmt->bindParam(':title', $title, PDO::PARAM_STR);
-			$stmt->bindParam(':content', $content, PDO::PARAM_STR);
-			$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
-			$stmt->bindParam(':date', $date, PDO::PARAM_STR);
-			$stmt->bindParam(':editId', $editId, PDO::PARAM_INT);
-			$stmt->bindParam(':memberId', $memberId, PDO::PARAM_STR);
-			$stmt->execute();
+				if (move_uploaded_file($image['tmp_name'], $path)) {
 
-			if (!$stmt) {
-				die(var_dump($pdo->errorInfo()));
+					$sql = 'UPDATE posts SET title = :title, content = :content, filepath = :image, date = :date WHERE id = :editId AND user_id = :username';
+
+					$stmt = $pdo->prepare($sql);
+					$stmt->bindParam(':title', $title, PDO::PARAM_STR);
+					$stmt->bindParam(':content', $content, PDO::PARAM_STR);
+					$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
+					$stmt->bindParam(':date', $date, PDO::PARAM_STR);
+					$stmt->bindParam(':editId', $editId, PDO::PARAM_INT);
+					$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+					$stmt->execute();
+
+					if (!$stmt) {
+						die(var_dump($pdo->errorInfo()));
+					}
+				}
+
+				if($stmt->rowCount() >= 1) {
+					$_SESSION['success'] = 'Edit successful.';
+					redirect('/../../feed.php');
+					exit;
+
+				} else {
+					$_SESSION['error'] = 'There was an error.';
+					redirect('/../../feed.php');
+					exit;
+				}
 			}
 		}
-
-		if($stmt->rowCount() >= 1) {
-			$_SESSION['success'] = 'Edit successful.';
-			redirect('/../../feed.php');
-			exit;
-
-		} else {
-			$_SESSION['error'] = 'There was an error.';
-			redirect('/../../feed.php');
-			exit;
-		}
-	}
 } catch (PDOException $e) {
 	echo "Something went wrong with loading posts: " . $e->getMessage();
 }

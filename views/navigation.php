@@ -9,4 +9,9 @@
 		<?= isLoggedIn(); ?>
 	</li>
 </ul>
-<?= notification(); ?>
+	<?php
+	foreach (getNotifications() as $notification) : ?>
+		<p class="<?php echo $notification['class']; ?>">
+			<?php echo $notification['message']; ?>
+		</p>
+	<?php endforeach; ?>

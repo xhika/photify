@@ -28,12 +28,12 @@ try {
 	        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	        if (!password_verify($password, $user['password'])) {
-    			$_SESSION['error'] = 'Wrong username or password.';
+	        	addError('Your password was incorrect.');
 	        	redirect('../users/login.php');
 	        	exit;
 	        }  else {
 	 			$_SESSION['username'] = strtolower($username);
-	 			$_SESSION['success'] = "You have been logged in successfully!";
+	        	addSuccess('You have successfully been logged in!');
  				redirect('../users/profile.php');
 	        }
 	    }

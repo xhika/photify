@@ -3,6 +3,8 @@ require_once __DIR__.'/../app/autoload.php';
 require PHOTOIFY_PATH.'/views/header.php';
 require PHOTOIFY_PATH.'/app/users/settings-update.php';
 require PHOTOIFY_PATH.'/app/users/settings.php';
+
+
 ?>
 <div class="bg-grey-lighter p-6 mx-auto text-center text-teal">
 	<h1 class="uppercase"><?= $_SESSION['username']; ?></h1>

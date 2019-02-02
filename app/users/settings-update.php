@@ -32,7 +32,7 @@ try {
 		$columns = implode(', ', $columns);
 
 		if (empty($email) and empty($bio) and empty($password)) {
-			$_SESSION['error'] = 'Please fill at least one field.';
+			addError('Please fill at least one field.');
 			redirect('/views/update-view.php');
 		}
 
@@ -55,11 +55,11 @@ try {
 		$stmt->execute();
 
 		if (!$stmt) {
-			$_SESSION['error'] = 'Update unsuccessful, please try again.';
+			addError('Update failed, please try again.');
 				redirect('/app/users/profile.php');
 				exit;
 			} else {
-				$_SESSION['success'] = 'Update successfully completed!';
+				addSuccess('Update successfully completed!');
 				redirect('/app/users/profile.php');
 				exit;
 			}

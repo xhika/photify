@@ -17,7 +17,7 @@ try {
 			$email = strtolower($email);
 
 		if (empty($firstname && $lastname && $email && $username && $password)) {
-				$_SESSION['error'] = 'Please fill in all the required fields.';
+				addError('Please fill in all the required fields.');
 				redirect('register.php');
 		} else {
 
@@ -34,13 +34,13 @@ try {
 			$checkEmail = $result[0]['email'];
 
 			if ($checkUser === $username) {
-				$_SESSION['error'] = 'The username has already been taken, try another one!';
+				addError('The username has already been taken, try another one!');
 				redirect('register.php');
 				exit;
 			}
 
 			if ($checkEmail === $email) {
-				$_SESSION['error'] = 'The email has already been used.';
+				addError('The email has already been used.');
 				redirect('register.php');
 				exit;
 			}
@@ -63,10 +63,10 @@ try {
 			$stmt->execute();
 
 			if (!$stmt) {
-				$_SESSION['error'] = 'There was an error with registration.';
+				addError('There was an error with registration.');
 				// die(var_dump($pdo->errorInfo()));
 			} else {
-				$_SESSION['success'] = 'Registration successfully completed!';
+				addSuccess('Registration successfully completed!');
 				redirect('/../views/login-view.php');
 				exit;
 			}

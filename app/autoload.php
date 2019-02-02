@@ -23,5 +23,8 @@ $config = require __DIR__.'/config.php';
 $pdo = new PDO($config['database_path']);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
+// Initiate notification session
+if (!isset($_SESSION['notification'])) {
+	$_SESSION['notification'] = [];
+}
 

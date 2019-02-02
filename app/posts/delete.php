@@ -21,11 +21,11 @@ try {
 			$stmt->execute();
 
 			if (!$stmt) {
-				$_SESSION['error'] = 'There was an error, please try again.';
+				addError('There was an error, please try again.');
 				redirect('/app/users/profile.php');
 				exit;
 			} else {
-				$_SESSION['success'] = 'Post was successfully deleted.';
+				addSuccess('Post was successfully deleted.');
 				redirect('/app/users/profile.php');
 				exit;
 		}

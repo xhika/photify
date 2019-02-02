@@ -29,17 +29,44 @@ function getComments(PDO $pdo)
 	return $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 /**
- * Using $_SESSION to style upon success/error
+ * Adding notifications
  */
-function notification()
+
+function addNotification($notification, $type = null, $class = 'notification')
 {
-	if (isset($_SESSION['success'])) {
-		echo '<div class="p-4 bg-green text-1xl text-white text-center font-semibold tracking-wide">'.$_SESSION['success'].'</div>';
-		unset($_SESSION['success']);
-	} elseif (isset($_SESSION['error'])) {
-		echo '<div class="p-4 bg-red text-1xl text-white text-center font-semibold tracking-wide">'.$_SESSION['error'].'</div>';
-		unset($_SESSION['error']);
-	}
+	$data = [
+		'message' => $notification,
+		'type' => $type,
+		'class' => $class
+	];
+
+	$_SESSION['notification'][] = $data;
+}
+/**
+ * Using addNotifications function to handle errors
+ */
+
+function addError($message)
+{
+	addNotification($message, 'error', 'p-4 bg-red text-1xl text-white text-center font-semibold tracking-wide');
+}
+/**
+ * Using addNotification function to handle success
+ */
+function addSuccess($message)
+{
+	addNotification($message, 'success', 'p-4 bg-green text-1xl text-white text-center font-semibold tracking-wide');
+}
+/**
+ * Return notificaiton and unset
+ */
+function getNotifications()
+{
+	$notifications = $_SESSION['notification'];
+
+	unset($_SESSION['notification']);
+
+	return (array) $notifications;
 }
 /**
  * Determines if logged in.

@@ -30,7 +30,8 @@ try {
 	if (move_uploaded_file($image['tmp_name'], $path)) {
 
 	if (empty($title) && empty($content)) {
-		echo 'Please make sure you\'ve filled the required fields.';
+		addError('Please make sure you\'ve filled the required fields.');
+		redirect('/../../views/new-post.php');
 	} else {
 
 		$stmt = $pdo->prepare('INSERT INTO posts (title, content, date, user_id, filepath) VALUES (:title, :content, :date, :user_id, :image)');
@@ -46,7 +47,7 @@ try {
 		$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
 		$stmt->execute();
 
-		$_SESSION['success'] = 'Your post was successful.';
+		addSuccess('Your post was successful.');
 		redirect('/../../feed.php');
 		exit;
 	}

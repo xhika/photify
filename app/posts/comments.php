@@ -22,9 +22,10 @@ try {
 		$stmt->execute();
 
 		if (!$stmt) {
-			die(var_dump($pdo->errorInfo()));
+			addError('Something went wrong!');
+			redirect('/../../feed.php');
 		} else {
-			$_SESSION['success'] = 'Comment posted 👍';
+			addSuccess('Comment posted 👍');
 			redirect('/../../feed.php');
 		}
 	}

@@ -52,12 +52,12 @@ try {
 				}
 
 				if($stmt->rowCount() >= 1) {
-					$_SESSION['success'] = 'Edit successful.';
+					addSuccess('Edit Successfull');
 					redirect('/../../feed.php');
 					exit;
 
 				} else {
-					$_SESSION['error'] = 'There was an error.';
+					addError('There was an error.');
 					redirect('/../../feed.php');
 					exit;
 				}

@@ -6,5 +6,3 @@ enabled:
 disabled:
   - align_double_arrow
   - short_array_syntax
-
-

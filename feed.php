@@ -16,7 +16,7 @@ require __DIR__.'/app/posts/view.php';
 			<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($post['avatar']); ?>">
 			<a href="/app/users/visit.php?id=<?=$post['user_id']?>" class="no-underline text-white"><?= $post['user_id']; ?></a>
 		<!--Here we let users edit or delete-->
-			<?php if($_SESSION['username'] === $post['user_id']) : ?>
+			<?php if ($_SESSION['username'] === $post['user_id']) : ?>
 				<a href="/app/posts/delete.php?id=<?=$post['id']; ?>"><i class="float-right mb-2 text-2xl text-red-dark p-3 text-center no-underline text-white fas fa-backspace"></i></a>
 				<a href="/app/posts/update.php?id=<?=$post['id']; ?>"><i class="float-right mb-2 text-2xl text-green-darker p-3 text-center no-underline text-white fas fa-pen-square"></i></a>
 			<?php endif;?>
@@ -36,10 +36,10 @@ require __DIR__.'/app/posts/view.php';
 			<div class="pl-4 p-2 pb-8 pt-8 mx-auto w-5/6">
 
 		<?php
-		// Bring avatar from images table & all from comments table
-		$comments = getComments($pdo);
+        // Bring avatar from images table & all from comments table
+        $comments = getComments($pdo);
 
-			foreach ($comments as $comment) : ?>
+            foreach ($comments as $comment) : ?>
 				<?php if ($post['id'] === $comment['post_id']) : ?>
 					<div class="font-bold p-1 bg-teal text-white rounded">
 						<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($comment['avatar']); ?>">

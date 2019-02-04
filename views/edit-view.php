@@ -2,37 +2,40 @@
 require_once __DIR__.'/../app/autoload.php';
 require PHOTOIFY_PATH.'/views/header.php';
 
+    if (!isset($username)) {
+        redirect('/../app/users/login.php');
+    }
+
 // Here we bring post info from database for specific user.
 
 try {
-	$username = $_SESSION['username'];
-	$postId = $_GET['id'];
+    if ($username === $_SESSION['username']) {
+        $username = $_SESSION['username'];
+        $postId = $_GET['id'];
 
-	$stmt = $pdo->prepare('SELECT *,
-		(
-			SELECT COUNT(*) FROM likes WHERE post_id = posts.id
-		) AS likes,
-		(
-			SELECT filepath FROM images WHERE images.user_id = posts.user_id
-		) AS avatar
-		FROM posts
-		WHERE user_id = :username
-		AND id = :postId
-		ORDER BY date DESC');
+        $stmt = $pdo->prepare('SELECT *,
+			(
+				SELECT COUNT(*) FROM likes WHERE post_id = posts.id
+			) AS likes,
+			(
+				SELECT filepath FROM images WHERE images.user_id = posts.user_id
+			) AS avatar
+			FROM posts
+			WHERE user_id = :username
+			AND id = :postId
+			ORDER BY date DESC');
 
-	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
-	$stmt->bindParam(':postId', $postId, PDO::PARAM_INT);
-	$stmt->execute();
-	$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':postId', $postId, PDO::PARAM_INT);
+        $stmt->execute();
+        $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	if (!$stmt) {
-		die(var_dump($pdo->errorInfo()));
-	}
-
-
-
+        if (!$stmt) {
+            die(var_dump($pdo->errorInfo()));
+        }
+    }
 } catch (PDOException $e) {
-	echo "Something went wrong with loading posts: " . $e->getMessage();
+    echo "Something went wrong with loading posts: " . $e->getMessage();
 }
 
 

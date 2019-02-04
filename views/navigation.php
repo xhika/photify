@@ -10,7 +10,7 @@
 	</li>
 </ul>
 	<?php
-	foreach (getNotifications() as $notification) : ?>
+    foreach (getNotifications() as $notification) : ?>
 		<p class="<?php echo $notification['class']; ?>">
 			<?php echo $notification['message']; ?>
 		</p>

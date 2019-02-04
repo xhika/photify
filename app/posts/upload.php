@@ -5,4 +5,3 @@ include_once __DIR__.'/../autoload.php';
 
 // Here we upload filepath to db.
 uploadImage($pdo);
-

@@ -11,4 +11,3 @@ $lastname = ucfirst($user['lastname']);
 $email = ucfirst($user['email']);
 $bio = ucfirst($user['bio'] ?? '');
 $password = $user['password'];
-

@@ -50,13 +50,13 @@ $bio = $posts[0]['bio'];
 	<div class="mt-2">
 		<h2 class="text-teal pb-4">Photos</h2>
 		<?php
-			if (!$posts) {
-				echo "<div class='p-2 bg-green text-1xl text-white text-center tracking-wide'>You have no posts, create one 😁</div>";
-			}
-		?>
+            if (!$posts) {
+                echo "<div class='p-2 bg-green text-1xl text-white text-center tracking-wide'>You have no posts, create one 😁</div>";
+            }
+        ?>
 	</div>
 
-<?php foreach($posts as $post) : ?>
+<?php foreach ($posts as $post) : ?>
 	<div class="bg-grey-lighter md:max-w-sm mx-auto">
 		<div class="bg-teal p-4 text-white text-lg font-semibold text-left">
 			<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($post['avatar']); ?>">
@@ -78,18 +78,18 @@ $bio = $posts[0]['bio'];
 			<p class="pl-4 pt-2 font-thin leading-tight text-grey text-left"><?= timeAgo($post['date']); ?></p>
 			<div class="pl-4 p-2 pb-8 pt-8 mx-auto w-5/6">
 				<?php
-					// Bring avatar from images table & all from comments table
-				$sql = 'SELECT *,
+                    // Bring avatar from images table & all from comments table
+                $sql = 'SELECT *,
 						(
 							SELECT filepath FROM images WHERE images.user_id = comments.user_id
 						) AS avatar FROM comments';
 
-				$stmt = $pdo->prepare($sql);
-				$stmt->execute();
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute();
 
-				$comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-				foreach ($comments as $comment) : ?>
+                foreach ($comments as $comment) : ?>
 					<?php if ($post['id'] === $comment['post_id']) : ?>
 						<div class="text-left font-bold p-1 bg-teal text-white rounded">
 							<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($comment['avatar']); ?>">

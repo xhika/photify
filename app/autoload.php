@@ -25,6 +25,5 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Initiate notification session
 if (!isset($_SESSION['notification'])) {
-	$_SESSION['notification'] = [];
+    $_SESSION['notification'] = [];
 }
-

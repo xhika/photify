@@ -4,69 +4,65 @@ declare(strict_types=1);
 // Here we are updating users info.
 
 try {
-	if (isset($_POST['save'])) {
+    if (isset($_POST['save'])) {
+        $username = $_SESSION['username'];
 
-		$username = $_SESSION['username'];
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $bio = filter_var($_POST['bio'], FILTER_SANITIZE_STRING);
+        $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
-		$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-		$bio = filter_var($_POST['bio'], FILTER_SANITIZE_STRING);
-		$password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        $email = strtolower($email);
+        $bio = ucfirst($bio);
 
-		$email = strtolower($email);
-		$bio = ucfirst($bio);
+        $columns = [];
 
-		$columns = [];
+        if (! empty($email)) {
+            $columns[] = 'email = :email';
+        }
 
-		if (! empty($email)) {
-		     $columns[] = 'email = :email';
-		}
+        if (! empty($bio)) {
+            $columns[] = 'bio = :bio';
+        }
 
-		if (! empty($bio)) {
-		     $columns[] = 'bio = :bio';
-		}
+        if (! empty($password)) {
+            $columns[] = 'password = :password';
+        }
 
-		if (! empty($password)) {
-		     $columns[] = 'password = :password';
-		}
+        $columns = implode(', ', $columns);
 
-		$columns = implode(', ', $columns);
+        if (empty($email) and empty($bio) and empty($password)) {
+            addError('Please fill at least one field.');
+            redirect('/views/update-view.php');
+        }
 
-		if (empty($email) and empty($bio) and empty($password)) {
-			addError('Please fill at least one field.');
-			redirect('/views/update-view.php');
-		}
+        $sql = "UPDATE users SET $columns WHERE username = :username";
 
-		$sql = "UPDATE users SET $columns WHERE username = :username";
-
-		$stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare($sql);
 
 
-		if (!empty($email)) {
-			$stmt->bindParam(':email', $email, PDO::PARAM_STR);
-		}
-		if (!empty($bio)) {
-			$stmt->bindParam(':bio', $bio, PDO::PARAM_STR);
-		}
-		if (!empty($password)) {
-			$password = password_hash($password, PASSWORD_DEFAULT);
-			$stmt->bindParam(':password', $password, PDO::PARAM_STR);
-		}
-		$stmt->bindParam(':username', $username, PDO::PARAM_STR);
-		$stmt->execute();
+        if (!empty($email)) {
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        }
+        if (!empty($bio)) {
+            $stmt->bindParam(':bio', $bio, PDO::PARAM_STR);
+        }
+        if (!empty($password)) {
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        }
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
 
-		if (!$stmt) {
-			addError('Update failed, please try again.');
-				redirect('/app/users/profile.php');
-				exit;
-			} else {
-				addSuccess('Update successfully completed!');
-				redirect('/app/users/profile.php');
-				exit;
-			}
-	}
-
+        if (!$stmt) {
+            addError('Update failed, please try again.');
+            redirect('/app/users/profile.php');
+            exit;
+        } else {
+            addSuccess('Update successfully completed!');
+            redirect('/app/users/profile.php');
+            exit;
+        }
+    }
 } catch (Exception $e) {
-	echo 'Something went wrong with the connection: ' . $e->getMessage();
+    echo 'Something went wrong with the connection: ' . $e->getMessage();
 }
-
-

@@ -10,4 +10,3 @@ session_unset();
 session_destroy();
 
 redirect('/views/login-view.php');
-

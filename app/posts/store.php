@@ -9,52 +9,46 @@ require __DIR__.'/../../views/new-post.php';
 
 
 try {
+    if (isset($_POST['title'], $_POST['content'], $_POST['post'])) {
+        $post = $_POST;
+        $image = $_FILES['image'];
 
-	if (isset($_POST['title'], $_POST['content'], $_POST['post'])) {
-		$post = $_POST;
-		$image = $_FILES['image'];
+        $title = filter_var($post['title'], FILTER_SANITIZE_STRING);
+        $content = filter_var($post['content'], FILTER_SANITIZE_STRING);
 
-		$title = filter_var($post['title'], FILTER_SANITIZE_STRING);
-		$content = filter_var($post['content'], FILTER_SANITIZE_STRING);
+        $date = date('Y-m-d H:i:s');
+        $userId = $_SESSION['username'];
+    }
+    $path = __DIR__.'/../../img/';
 
-		$date = date('Y-m-d H:i:s');
-		$userId = $_SESSION['username'];
-	}
-		$path = __DIR__.'/../../img/';
+    $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
 
-		$extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+    $filename = uniqid().'.'.$extension;
+    $path .= $filename;
 
-		$filename = uniqid().'.'.$extension;
-		$path .= $filename;
+    if (move_uploaded_file($image['tmp_name'], $path)) {
+        if (empty($title) && empty($content)) {
+            addError('Please make sure you\'ve filled the required fields.');
+            redirect('/../../views/new-post.php');
+        } else {
+            $stmt = $pdo->prepare('INSERT INTO posts (title, content, date, user_id, filepath) VALUES (:title, :content, :date, :user_id, :image)');
 
-	if (move_uploaded_file($image['tmp_name'], $path)) {
+            if (!$stmt) {
+                die(var_dump($pdo->errorInfo()));
+            }
 
-	if (empty($title) && empty($content)) {
-		addError('Please make sure you\'ve filled the required fields.');
-		redirect('/../../views/new-post.php');
-	} else {
+            $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+            $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+            $stmt->bindParam(':date', $date, PDO::PARAM_STR);
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_STR);
+            $stmt->bindParam(':image', $filename, PDO::PARAM_STR);
+            $stmt->execute();
 
-		$stmt = $pdo->prepare('INSERT INTO posts (title, content, date, user_id, filepath) VALUES (:title, :content, :date, :user_id, :image)');
-
-		if (!$stmt) {
-    		die(var_dump($pdo->errorInfo()));
-		}
-
-		$stmt->bindParam(':title', $title, PDO::PARAM_STR);
-		$stmt->bindParam(':content', $content, PDO::PARAM_STR);
-		$stmt->bindParam(':date', $date, PDO::PARAM_STR);
-		$stmt->bindParam(':user_id', $userId, PDO::PARAM_STR);
-		$stmt->bindParam(':image', $filename, PDO::PARAM_STR);
-		$stmt->execute();
-
-		addSuccess('Your post was successful.');
-		redirect('/../../feed.php');
-		exit;
-	}
-}
+            addSuccess('Your post was successful.');
+            redirect('/../../feed.php');
+            exit;
+        }
+    }
 } catch (PDOException $e) {
-	echo "Something went wrong with loading posts: " . $e->getMessage();
+    echo "Something went wrong with loading posts: " . $e->getMessage();
 }
-
-
-

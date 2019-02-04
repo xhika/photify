@@ -1,4 +1,5 @@
-# photoify
+# photoify [![StyleCI](https://github.styleci.io/repos/161142617/shield?branch=master)](https://github.styleci.io/repos/161142617)
+
 ![screenshot](preview.gif)
 
 

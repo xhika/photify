@@ -6,7 +6,6 @@ require __DIR__.'/../../views/login-view.php';
 
 // In this file we login users.
 
-
 try {
     if (isset($_POST['username'], $_POST['password'])) {
         $username = trim(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
@@ -36,5 +35,5 @@ try {
         }
     }
 } catch (PDOException $e) {
-    echo "There was a problem with your connection:" . $e->getMessage();
+    echo 'There was a problem with your connection:'.$e->getMessage();
 }

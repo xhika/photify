@@ -5,9 +5,8 @@ require __DIR__.'/../../views/header.php';
 
 $userId = $_GET['id'];
 
-$userResult =  getUserInfo($pdo);
+$userResult = getUserInfo($pdo);
 $bio = $userResult['bio'];
-
 
 $stmt = $pdo->prepare('SELECT *,
 	(
@@ -25,7 +24,6 @@ $stmt = $pdo->prepare('SELECT *,
 $stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
 $stmt->execute();
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 
 $avatar = $posts[0]['avatar'];
 $bio = $posts[0]['bio'];
@@ -93,14 +91,14 @@ $bio = $posts[0]['bio'];
 					<?php if ($post['id'] === $comment['post_id']) : ?>
 						<div class="text-left font-bold p-1 bg-teal text-white rounded">
 							<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($comment['avatar']); ?>">
-							<?= $comment['user_id'];?>
+							<?= $comment['user_id']; ?>
 						</div>
 						<div class="m-2 text-left">
 							<p class="p-2 text-grey-darkest"><?= $comment['comment']; ?></p>
 						</div>
 					<?php endif; ?>
 				<?php endforeach; ?>
-				<form action ="/app/posts/comments.php?id=<?=$posts['id'];?>" method="post" class="flex">
+				<form action ="/app/posts/comments.php?id=<?=$posts['id']; ?>" method="post" class="flex">
 					<input class="w-3/4 pl-4 pr-2 bg-grey-light h-12 rounded-full outline-none focus:bg-white focus:border-teal border-2 border-grey-light rounded py-2 border-solid border-black my-2 shadow" type="text" name="comment" placeholder="Write something nice ☺️">
 					<button type="submit" name="send" class="ml-2 mx-auto m-2 px-3 bg-teal rounded text-white font-thin">
 						<a class="no-underline text-white">Send</a>

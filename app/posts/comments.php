@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 // Here we create comments
@@ -31,5 +32,5 @@ try {
 
     require PHOTOIFY_PATH.'/feed.php';
 } catch (PDOException $e) {
-    echo "Something went wrong with loading posts: " . $e->getMessage();
+    echo 'Something went wrong with loading posts: '.$e->getMessage();
 }

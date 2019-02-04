@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 require __DIR__.'/../../views/register-view.php';
@@ -70,5 +71,5 @@ try {
         }
     }
 } catch (PDOException $e) {
-    echo "Something went wrong with the connection:" . $e->getMessage();
+    echo 'Something went wrong with the connection:'.$e->getMessage();
 }

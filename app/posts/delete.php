@@ -30,5 +30,5 @@ try {
         }
     }
 } catch (Exception $e) {
-    echo 'Something went wrong with the connection: ' . $e->getMessage();
+    echo 'Something went wrong with the connection: '.$e->getMessage();
 }

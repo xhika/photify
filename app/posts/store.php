@@ -7,7 +7,6 @@ require __DIR__.'/../../views/new-post.php';
 
 // In this file we store/insert new posts in the database.
 
-
 try {
     if (isset($_POST['title'], $_POST['content'], $_POST['post'])) {
         $post = $_POST;
@@ -50,5 +49,5 @@ try {
         }
     }
 } catch (PDOException $e) {
-    echo "Something went wrong with loading posts: " . $e->getMessage();
+    echo 'Something went wrong with loading posts: '.$e->getMessage();
 }

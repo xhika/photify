@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 require __DIR__.'/../autoload.php';
@@ -27,11 +28,11 @@ try {
 
             $stmt->execute();
 
-            die(json_encode([
+            die(json_encode(array(
                 'action' => 'unliked',
                 'post' => $postId,
                 'user' => $user,
-            ]));
+            )));
         } else {
             $sql = 'INSERT INTO likes (user_id, post_id) VALUES (:username, :postId)';
             $stmt = $pdo->prepare($sql);
@@ -41,15 +42,15 @@ try {
 
             $stmt->execute();
 
-            die(json_encode([
+            die(json_encode(array(
                 'action' => 'liked',
                 'post' => $postId,
                 'user' => $user,
-            ]));
+            )));
         }
     }
 } catch (Exception $e) {
-    echo json_encode([
-        'error' => 'Something went wrong with the connection ' . $e->getMessage(),
-    ]);
+    echo json_encode(array(
+        'error' => 'Something went wrong with the connection '.$e->getMessage(),
+    ));
 }

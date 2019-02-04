@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 // Here we are updating users info.
@@ -16,15 +17,15 @@ try {
 
         $columns = [];
 
-        if (! empty($email)) {
+        if (!empty($email)) {
             $columns[] = 'email = :email';
         }
 
-        if (! empty($bio)) {
+        if (!empty($bio)) {
             $columns[] = 'bio = :bio';
         }
 
-        if (! empty($password)) {
+        if (!empty($password)) {
             $columns[] = 'password = :password';
         }
 
@@ -38,7 +39,6 @@ try {
         $sql = "UPDATE users SET $columns WHERE username = :username";
 
         $stmt = $pdo->prepare($sql);
-
 
         if (!empty($email)) {
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -64,5 +64,5 @@ try {
         }
     }
 } catch (Exception $e) {
-    echo 'Something went wrong with the connection: ' . $e->getMessage();
+    echo 'Something went wrong with the connection: '.$e->getMessage();
 }

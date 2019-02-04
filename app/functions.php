@@ -29,36 +29,34 @@ function getComments(PDO $pdo)
     return $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 /**
- * Adding notifications
+ * Adding notifications.
  */
-
 function addNotification($notification, $type = null, $class = 'notification')
 {
     $data = [
         'message' => $notification,
-        'type' => $type,
-        'class' => $class
+        'type'    => $type,
+        'class'   => $class,
     ];
 
     $_SESSION['notification'][] = $data;
 }
 /**
- * Using addNotifications function to handle errors
+ * Using addNotifications function to handle errors.
  */
-
 function addError($message)
 {
     addNotification($message, 'error', 'p-4 bg-red text-1xl text-white text-center font-semibold tracking-wide');
 }
 /**
- * Using addNotification function to handle success
+ * Using addNotification function to handle success.
  */
 function addSuccess($message)
 {
     addNotification($message, 'success', 'p-4 bg-green text-1xl text-white text-center font-semibold tracking-wide');
 }
 /**
- * Return notificaiton and unset
+ * Return notificaiton and unset.
  */
 function getNotifications()
 {
@@ -113,7 +111,7 @@ function getUserInfo(PDO $pdo)
 
         return $results;
     } catch (Exception $e) {
-        echo 'Something went wrong with the connection: ' . $e->getMessage();
+        echo 'Something went wrong with the connection: '.$e->getMessage();
     }
 }
 /**
@@ -177,7 +175,7 @@ function uploadImage(PDO $pdo)
             }
         }
     } catch (Exception $e) {
-        echo 'Something went wrong with the connection: ' . $e->getMessage();
+        echo 'Something went wrong with the connection: '.$e->getMessage();
     }
 }
 /**
@@ -197,13 +195,14 @@ function getAvatar(PDO $pdo)
         if (empty($results['filepath'])) {
             $results['filepath'] = '/no-avatar.png';
         }
+
         return $results;
     } catch (Exception $e) {
-        echo 'Something went wrong with the connection: ' . $e->getMessage();
+        echo 'Something went wrong with the connection: '.$e->getMessage();
     }
 }
 /**
- * Here we get default values for user
+ * Here we get default values for user.
  */
 function defaultAvatar($avatar)
 {
@@ -219,6 +218,7 @@ function defaultBio($bio)
     if (empty($bio)) {
         return "<p class='italic'>Change me in settings.</p>";
     }
+
     return $bio;
 }
 
@@ -227,54 +227,54 @@ function defaultBio($bio)
  */
 function timeAgo($date)
 {
-    date_default_timezone_set("Europe/Stockholm");
+    date_default_timezone_set('Europe/Stockholm');
     $timeAgo = strtotime($date);
     $currentTime = time();
     $timeDifference = $currentTime - $timeAgo;
     $seconds = $timeDifference;
 
     $minutes = round($seconds / 60); // value 60 is seconds
-    $hours   = round($seconds / 3600); //value 3600 is 60 minutes * 60 sec
-    $days    = round($seconds / 86400); //86400 = 24 * 60 * 60;
-    $weeks   = round($seconds / 604800); // 7*24*60*60;
-    $months  = round($seconds / 2629440); //((365+365+365+365+366)/5/12)*24*60*60
-    $years   = round($seconds / 31553280); //(365+365+365+365+366)/5 * 24 * 60 * 60
+    $hours = round($seconds / 3600); //value 3600 is 60 minutes * 60 sec
+    $days = round($seconds / 86400); //86400 = 24 * 60 * 60;
+    $weeks = round($seconds / 604800); // 7*24*60*60;
+    $months = round($seconds / 2629440); //((365+365+365+365+366)/5/12)*24*60*60
+    $years = round($seconds / 31553280); //(365+365+365+365+366)/5 * 24 * 60 * 60
 
     if ($seconds <= 60) {
-        return "Just now";
+        return 'Just now';
     } elseif ($minutes <= 60) {
         if ($minutes == 1) {
-            return "one minute ago";
+            return 'one minute ago';
         } else {
             return "$minutes minutes ago";
         }
     } elseif ($hours <= 24) {
         if ($hours == 1) {
-            return "an hour ago";
+            return 'an hour ago';
         } else {
             return "$hours hours ago";
         }
     } elseif ($days <= 7) {
         if ($days == 1) {
-            return "yesterday";
+            return 'yesterday';
         } else {
             return "$days days ago";
         }
     } elseif ($weeks <= 4.3) {
         if ($weeks == 1) {
-            return "a week ago";
+            return 'a week ago';
         } else {
             return "$weeks weeks ago";
         }
     } elseif ($months <= 12) {
         if ($months == 1) {
-            return "a month ago";
+            return 'a month ago';
         } else {
             return "$months months ago";
         }
     } else {
         if ($years == 1) {
-            return "one year ago";
+            return 'one year ago';
         } else {
             return "$years years ago";
         }

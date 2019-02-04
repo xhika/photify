@@ -16,7 +16,7 @@ $filepath = $imageResult['filepath'];
 		<div class="flex-col font-light text-lg">
 			<div class="flex text-teal-dark justify-between">
 				<span class="font-normal">Name</span>
-				<p class="pb-4"> <?= $firstname . ' ' . $lastname; ?></p>
+				<p class="pb-4"> <?= $firstname.' '.$lastname; ?></p>
 			</div>
 			<div class="flex text-teal-dark justify-between">
 				<span class="font-normal">Email</span>

@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 $user = getuserInfo($pdo);
-
 
 // In here we are retrieving info about user with getUserInfo function.
 

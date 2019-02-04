@@ -3,7 +3,6 @@ require_once __DIR__.'/app/autoload.php';
 require __DIR__.'/views/header.php';
 require __DIR__.'/app/posts/view.php';
 
-
 ?>
 <h2 class="max-w-lg mx-auto text-center pt-6 pb-6">
 	<a href="/../feed.php" class="block no-underline text-teal text-4xl tracking-wide">Feed</a>
@@ -19,7 +18,7 @@ require __DIR__.'/app/posts/view.php';
 			<?php if ($_SESSION['username'] === $post['user_id']) : ?>
 				<a href="/app/posts/delete.php?id=<?=$post['id']; ?>"><i class="float-right mb-2 text-2xl text-red-dark p-3 text-center no-underline text-white fas fa-backspace"></i></a>
 				<a href="/app/posts/update.php?id=<?=$post['id']; ?>"><i class="float-right mb-2 text-2xl text-green-darker p-3 text-center no-underline text-white fas fa-pen-square"></i></a>
-			<?php endif;?>
+			<?php endif; ?>
 		</div>
 		<img class="border block mx-auto w-full h-64" src="/img/<?= $post['filepath']; ?>">
 		<div class="flex flex-col justify-around bg-grey-lightest">
@@ -43,14 +42,14 @@ require __DIR__.'/app/posts/view.php';
 				<?php if ($post['id'] === $comment['post_id']) : ?>
 					<div class="font-bold p-1 bg-teal text-white rounded">
 						<img class="h-10 bg-white rounded-full mr-2" src="/img/<?= defaultAvatar($comment['avatar']); ?>">
-						<a href="/app/users/visit.php?id=<?=$comment['user_id']?>" class="no-underline text-white"><?= $comment['user_id'];?></a>
+						<a href="/app/users/visit.php?id=<?=$comment['user_id']?>" class="no-underline text-white"><?= $comment['user_id']; ?></a>
 					</div>
 					<div class="m-2">
 						<p class="p-2 text-grey-darkest"><?= $comment['comment']; ?></p>
 					</div>
 				<?php endif; ?>
 			<?php endforeach; ?>
-			<form action ="/app/posts/comments.php?id=<?=$post['id'];?>" method="post" class="flex">
+			<form action ="/app/posts/comments.php?id=<?=$post['id']; ?>" method="post" class="flex">
 				<input class="w-3/4 pl-4 pr-2 bg-grey-light h-12 rounded-full outline-none focus:bg-white focus:border-teal border-2 border-grey-light rounded py-2 border-solid border-black my-2 shadow" type="text" name="comment" placeholder="Write something nice ☺️">
 				<button type="submit" name="send" class="ml-2 mx-auto m-2 px-3 bg-teal rounded text-white font-thin">
 					<a class="no-underline text-white">Send</a>

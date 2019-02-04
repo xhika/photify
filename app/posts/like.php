@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 require __DIR__.'/../autoload.php';
@@ -29,8 +30,8 @@ try {
 
             die(json_encode([
                 'action' => 'unliked',
-                'post' => $postId,
-                'user' => $user,
+                'post'   => $postId,
+                'user'   => $user,
             ]));
         } else {
             $sql = 'INSERT INTO likes (user_id, post_id) VALUES (:username, :postId)';
@@ -43,13 +44,13 @@ try {
 
             die(json_encode([
                 'action' => 'liked',
-                'post' => $postId,
-                'user' => $user,
+                'post'   => $postId,
+                'user'   => $user,
             ]));
         }
     }
 } catch (Exception $e) {
     echo json_encode([
-        'error' => 'Something went wrong with the connection ' . $e->getMessage(),
+        'error' => 'Something went wrong with the connection '.$e->getMessage(),
     ]);
 }

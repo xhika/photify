@@ -21,7 +21,6 @@ try {
 
             $date = date('Y-m-d H:i:s');
 
-
             $path = __DIR__.'/../../img/';
 
             $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
@@ -58,5 +57,5 @@ try {
         }
     }
 } catch (PDOException $e) {
-    echo "Something went wrong with loading posts: " . $e->getMessage();
+    echo 'Something went wrong with loading posts: '.$e->getMessage();
 }

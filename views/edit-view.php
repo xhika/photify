@@ -35,9 +35,8 @@ try {
         }
     }
 } catch (PDOException $e) {
-    echo "Something went wrong with loading posts: " . $e->getMessage();
+    echo 'Something went wrong with loading posts: '.$e->getMessage();
 }
-
 
 foreach ($posts as $post) : ?>
 
@@ -49,7 +48,7 @@ foreach ($posts as $post) : ?>
 			</label>
 			<p class="italic text-grey">Please select image before updating.</p>
 			<label for=title class="block font-bold uppercase tracking-wide pt-3">Subject:</label>
-			<input type="title" name="title" class="w-3/4 bg-grey-light rounded py-2 my-2 focus:bg-white" value="<?= $post['title'] ;?>">
+			<input type="title" name="title" class="w-3/4 bg-grey-light rounded py-2 my-2 focus:bg-white" value="<?= $post['title']; ?>">
 			<label for=content class="block font-bold uppercase tracking-wide pt-3">Post:</label>
 			<textarea name="content" class="w-3/4 bg-grey-light my-2 mx-auto focus:bg-white" cols="25" rows="5"><?= $post['content']; ?></textarea>
 		</div>

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 // This file contains a list of global configuration settings.
 
-return [
+return array(
     'title' => 'Photoify',
     'database_path' => sprintf('sqlite:%s/database/database.db', __DIR__),
-];
+);

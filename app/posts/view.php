@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 // Here we bring posts from database
@@ -22,5 +23,5 @@ try {
 
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    echo "Something went wrong with loading posts: " . $e->getMessage();
+    echo 'Something went wrong with loading posts: '.$e->getMessage();
 }
